@@ -27,7 +27,7 @@ const Upload = ({ onSuccess }) => {
         res.status === 200
           ? toast.success("File Uploaded Succesfully", {
               position: "top-right",
-              autoClose: 5000,
+              autoClose: 3000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
@@ -37,7 +37,7 @@ const Upload = ({ onSuccess }) => {
             })
           : toast.error("Error Uploading Files", {
               position: "top-right",
-              autoClose: 5000,
+              autoClose: 3000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,

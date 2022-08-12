@@ -38,6 +38,10 @@ const FetchFiles = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    setTimeout(() => {
+      fetchButton(e);
+    }, 0);
   };
 
   return (

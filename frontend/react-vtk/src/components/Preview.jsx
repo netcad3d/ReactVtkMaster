@@ -4,6 +4,11 @@ const Preview = ({ files }) => {
   if (!files.length) {
     return null;
   }
+
+  setTimeout(() => {
+    window.location.reload();
+  }, 4500);
+
   return files.map((file, index) => (
     <div
       key={index}
