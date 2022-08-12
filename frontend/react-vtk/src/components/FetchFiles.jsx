@@ -28,7 +28,8 @@ const FetchFiles = () => {
       });
   };
 
-  const deleteFile = (name) => {
+  const deleteFile = (e, name) => {
+    e.preventDefault();
     axios
       .delete(`http://localhost:3000/deleteFile/${name}`)
       .then((res) => {
@@ -76,7 +77,7 @@ const FetchFiles = () => {
             <div className="justify-end">
               <button
                 className="text-xl font-semibold text-white border-2 rounded-lg p-3 w-[200px] cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide mr-2"
-                onClick={deleteFile(file.name)}
+                onClick={(e) => deleteFile(e, file.name)}
               >
                 Dosyayı Sil
               </button>

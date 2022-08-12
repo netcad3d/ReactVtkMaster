@@ -35,31 +35,54 @@ app.get("/fetchFiles", (req, res) => {
   const files = fs.readdirSync(path.join(__dirname, "uploads"));
 
   const response = [];
+  let id = 0;
 
   files.forEach((file) => {
     const extension = path.extname(file);
     const name = path.basename(file, extension);
     const size = fs.statSync(path.join(__dirname, "uploads", file)).size;
     const url = `http://localhost:3000/uploads/${file}`;
+    const idG = id++;
 
     response.push({
       name,
       extension,
       size,
       url,
+      idG,
     });
   }),
     res.send(response);
 });
 
-app.post("/deleteFile:name", (req, res) => {
-  const file = req.body.name;
-  const filePath = path.join(__dirname, "uploads", file);
+app.delete("/deleteFile/:name", (req, res) => {
+  const name = req.params.name;
+  const files = fs.readdirSync(path.join(__dirname, "uploads"));
+  const response = [];
+  let id = 0;
 
-  fs.unlinkSync(filePath);
+  files.forEach((file) => {
+    const extension = path.extname(file);
+    const nameFile = path.basename(file, extension);
+    const size = fs.statSync(path.join(__dirname, "uploads", file)).size;
+    const url = `http://localhost:3000/uploads/${file}`;
+    const idG = id++;
 
-  res.send("File deleted");
+    if (nameFile === name) {
+      fs.unlinkSync(path.join(__dirname, "uploads", file));
+    }
+
+    response.push({
+      name: nameFile,
+      extension,
+      size,
+      url,
+      idG,
+    });
+  }),
+    res.send(response);
 });
+
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
