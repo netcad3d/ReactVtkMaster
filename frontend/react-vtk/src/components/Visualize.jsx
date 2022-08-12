@@ -1,13 +1,12 @@
+import { useState, useRef, useEffect } from "react";
 
-import { useState, useRef, useEffect } from 'react';
+import "@kitware/vtk.js/Rendering/Profiles/Geometry";
 
-import '@kitware/vtk.js/Rendering/Profiles/Geometry';
+import vtkFullScreenRenderWindow from "@kitware/vtk.js/Rendering/Misc/FullScreenRenderWindow";
 
-import vtkFullScreenRenderWindow from '@kitware/vtk.js/Rendering/Misc/FullScreenRenderWindow';
-
-import vtkActor           from '@kitware/vtk.js/Rendering/Core/Actor';
-import vtkMapper          from '@kitware/vtk.js/Rendering/Core/Mapper';
-import vtkConeSource      from '@kitware/vtk.js/Filters/Sources/ConeSource';
+import vtkActor from "@kitware/vtk.js/Rendering/Core/Actor";
+import vtkMapper from "@kitware/vtk.js/Rendering/Core/Mapper";
+import vtkConeSource from "@kitware/vtk.js/Filters/Sources/ConeSource";
 
 function Visualize() {
   const vtkContainerRef = useRef(null);
@@ -47,7 +46,8 @@ function Visualize() {
 
     return () => {
       if (context.current) {
-        const { fullScreenRenderer, coneSource, actor, mapper } = context.current;
+        const { fullScreenRenderer, coneSource, actor, mapper } =
+          context.current;
         actor.delete();
         mapper.delete();
         coneSource.delete();
@@ -78,11 +78,11 @@ function Visualize() {
       <div ref={vtkContainerRef} />
       <table
         style={{
-          position: 'absolute',
-          top: '25px',
-          left: '25px',
-          background: 'white',
-          padding: '12px',
+          position: "absolute",
+          top: "25px",
+          left: "25px",
+          background: "white",
+          padding: "12px",
         }}
       >
         <tbody>
@@ -90,7 +90,7 @@ function Visualize() {
             <td>
               <select
                 value={representation}
-                style={{ width: '100%' }}
+                style={{ width: "100%" }}
                 onInput={(ev) => setRepresentation(Number(ev.target.value))}
               >
                 <option value="0">Points</option>
