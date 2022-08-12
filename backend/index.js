@@ -40,7 +40,7 @@ app.get("/fetchFiles", (req, res) => {
     const extension = path.extname(file);
     const name = path.basename(file, extension);
     const size = fs.statSync(path.join(__dirname, "uploads", file)).size;
-    const url = `http://localhost:3000/deleteFile/${file}`;
+    const url = `http://localhost:3000/uploads/${file}`;
 
     response.push({
       name,
@@ -59,7 +59,7 @@ app.post("/deleteFile:name", (req, res) => {
   fs.unlinkSync(filePath);
 
   res.send("File deleted");
-}),
-  app.listen(3000, () => {
-    console.log("Server is running on port 3000");
-  });
+});
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
+});

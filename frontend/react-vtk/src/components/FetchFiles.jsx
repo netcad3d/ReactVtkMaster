@@ -30,7 +30,7 @@ const FetchFiles = () => {
 
   const deleteFile = (name) => {
     axios
-      .delete(`http://localhost:3000/uploads/${name}`)
+      .delete(`http://localhost:3000/deleteFile/${name}`)
       .then((res) => {
         setFiles(res.data);
       })
