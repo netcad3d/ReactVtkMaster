@@ -33,7 +33,7 @@ const FetchFiles = () => {
   const deleteFile = (e, name) => {
     e.preventDefault();
     axios
-      .delete(`http://localhost:3000/deleteFile/${name}`)
+      .delete(`http://localhost:3000/uploads/${name}`)
       .then((res) => {
         res.status === 200
           ? toast.success("File Deleted Succesfully", {
@@ -66,6 +66,11 @@ const FetchFiles = () => {
       fetchButton(e);
     }, 0);
   };
+
+  const onVisualize=()=>{
+	console.log('visualize works');
+
+  }
 
   return (
     <>
@@ -108,7 +113,7 @@ const FetchFiles = () => {
               >
                 Dosyayı Sil
               </button>
-              <button className="text-xl font-semibold text-white border-2 rounded-lg p-3 w-[200px] cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide">
+              <button onClick={onVisualize} className="text-xl font-semibold text-white border-2 rounded-lg p-3 w-[200px] cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide">
                 Görüntüle
               </button>
             </div>
