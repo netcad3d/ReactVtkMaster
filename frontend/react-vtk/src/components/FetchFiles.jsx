@@ -78,7 +78,7 @@ const FetchFiles = () => {
                 className="text-xl font-semibold text-white border-2 rounded-lg p-3 w-[200px] cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide mr-2"
                 onClick={deleteFile(file.name)}
               >
-                Dosyayı Sil Anan
+                Dosyayı Sil
               </button>
               <button className="text-xl font-semibold text-white border-2 rounded-lg p-3 w-[200px] cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide">
                 Görüntüle
