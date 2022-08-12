@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+import { toast } from "react-toastify";
+
 const FetchFiles = () => {
   const [files, setFiles] = useState([]);
 
@@ -33,6 +35,27 @@ const FetchFiles = () => {
     axios
       .delete(`http://localhost:3000/deleteFile/${name}`)
       .then((res) => {
+        res.status === 200
+          ? toast.success("File Deleted Succesfully", {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            })
+          : toast.error("Error Deleting File", {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
         setFiles(res.data);
       })
       .catch((err) => {
