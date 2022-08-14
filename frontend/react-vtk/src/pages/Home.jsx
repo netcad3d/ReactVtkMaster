@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Upload from "../components/Upload";
 import Preview from "../components/Preview";
 import FetchFiles from "../components/FetchFiles";
+import Clip from "../components/Clip";
 
 const Home = () => {
   const [files, setFiles] = useState([]);

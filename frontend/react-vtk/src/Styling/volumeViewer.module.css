@@ -1,0 +1,14 @@
+.bigFileDrop{position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+background-color: white;
+background-image: url(https://kitware.github.io/vtk-js/examples/VolumeViewer/d12fb5393ccf95ded195.jpg);
+background-repeat: no-repeat;
+background-position: center;
+background-size: contain;
+border-radius: 10px;
+width:50px;
+padding: calc(50vh - 2em) calc(50vw - 25px - 2em);
+cursor: pointer;
+}

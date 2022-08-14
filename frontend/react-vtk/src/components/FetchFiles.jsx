@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Poly from "./Poly";
 
 import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import { Routes, Route } from "react-router-dom";
+import SphereClip from "./SphereClip";
 
-const FetchFiles = () => {
+
+const FetchFiles = ({handleUrl}) => {
   const [files, setFiles] = useState([]);
-
+  const[urlTo,seturlTo]=useState("");
+  const[htmlPart,setHtmlPart]=useState(null);
   useEffect(() => {
     axios
       .get("http://localhost:3000/fetchFiles")
@@ -69,9 +74,17 @@ const FetchFiles = () => {
     }, 0);
   };
 
-  const onVisualize = () => {
-    console.log("visualize works");
-  };
+  function onVisualize(url){
+
+	setHtmlPart(<div>
+		<Routes>
+			 <Route path="*" element={<SphereClip url={url}/>} />
+		</Routes>
+	</div>);
+	
+	
+
+  }
 
   return (
     <>
@@ -106,6 +119,10 @@ const FetchFiles = () => {
                 <span className="text-secondary">File Size: </span>{" "}
                 {file.size / 1000000} mb
               </p>
+			  <p className="text-white text-lg">
+                <span className="text-secondary">File Url: </span>{" "}
+                {file.url} 
+              </p>
             </div>
             <div className="justify-end">
               <button
@@ -115,11 +132,12 @@ const FetchFiles = () => {
                 Dosyayı Sil
               </button>
               <button
-                onClick={onVisualize}
+                onClick={()=>onVisualize(file.url)}
                 className="text-xl font-semibold text-white border-2 rounded-lg p-3 w-[200px] cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide"
               >
                 Görüntüle
               </button>
+			 <div>{htmlPart?htmlPart:""}</div>
             </div>
           </div>
         ))

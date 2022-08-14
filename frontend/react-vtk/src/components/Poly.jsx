@@ -7,12 +7,16 @@ import vtkFullScreenRenderWindow from "@kitware/vtk.js/Rendering/Misc/FullScreen
 import vtkMapper from "@kitware/vtk.js/Rendering/Core/Mapper";
 import vtkPolyDataReader from "@kitware/vtk.js/IO/Legacy/PolyDataReader";
 
-const Poly = () => {
+
+const Poly = (props) => {
+	const {url}=props;
   const vtkContainerRef = useRef(null);
   const context = useRef(null);
+ 
 
   useEffect(() => {
     if (!context.current) {
+		console.log(url+'%20-%20sphere.vtk');
       const fullScreenRenderer = vtkFullScreenRenderWindow.newInstance({
         background: [0, 0, 0],
       });
@@ -25,7 +29,7 @@ const Poly = () => {
       const reader = vtkPolyDataReader.newInstance();
 
       reader
-        .setUrl(`https://kitware.github.io/vtk-js/data/legacy/sphere.vtk`)
+        .setUrl(`${url}`)
         .then(() => {
           const polydata = reader.getOutputData(0);
           const mapper = vtkMapper.newInstance();
