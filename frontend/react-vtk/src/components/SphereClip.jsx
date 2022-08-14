@@ -112,9 +112,10 @@ const SphereClip = (props) => {
 		mapper.setInputConnection(reader.getOutputPort());
 	// this works https://kitware.github.io/vtk-js/data/volume/LIDC2.vti
 
-		reader.setUrl(url).then(() => {
+		reader.setUrl('https://kitware.github.io/vtk-js/data/volume/LIDC2.vti').then(() => {
 			reader.loadData().then(() => {
 			  const data = reader.getOutputData();
+			 // console.log(data);
 			  const extent = data.getExtent();
 			  const spacing = data.getSpacing();
 			  const sizeX = extent[1] * spacing[0];
