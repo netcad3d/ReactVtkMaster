@@ -6,13 +6,15 @@ import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import { Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SphereClip from "./SphereClip";
 
-
-const FetchFiles = ({handleUrl}) => {
+const FetchFiles = ({ handleUrl }) => {
   const [files, setFiles] = useState([]);
-  const[urlTo,seturlTo]=useState("");
-  const[htmlPart,setHtmlPart]=useState(null);
+  const [urlTo, seturlTo] = useState("");
+  const [htmlPart, setHtmlPart] = useState(null);
+  const navigate = useNavigate();
+
   useEffect(() => {
     axios
       .get("http://localhost:3000/fetchFiles")
@@ -74,17 +76,20 @@ const FetchFiles = ({handleUrl}) => {
     }, 0);
   };
 
-  function onVisualize(url){
+  // function onVisualize(url) {
+  //   setHtmlPart(
+  //     <div>
+  //       <Routes>
+  //         <Route path="*" element={<Poly url={url} />} />
+  //       </Routes>
+  //     </div>
+  //   );
+  // }
 
-	setHtmlPart(<div>
-		<Routes>
-			 <Route path="*" element={<Poly url={url}/>} />
-		</Routes>
-	</div>);
-	
-	
-
-  }
+  const viewFileHandler = (e, url) => {
+    e.preventDefault();
+    navigate(`/poly`, { state: { url } });
+  };
 
   return (
     <>
@@ -119,9 +124,8 @@ const FetchFiles = ({handleUrl}) => {
                 <span className="text-secondary">File Size: </span>{" "}
                 {file.size / 1000000} mb
               </p>
-			  <p className="text-white text-lg">
-                <span className="text-secondary">File Url: </span>{" "}
-                {file.url} 
+              <p className="text-white text-lg">
+                <span className="text-secondary">File Url: </span> {file.url}
               </p>
             </div>
             <div className="justify-end">
@@ -132,12 +136,13 @@ const FetchFiles = ({handleUrl}) => {
                 Dosyayı Sil
               </button>
               <button
-                onClick={()=>onVisualize(file.url)}
+                onClick={(e) => viewFileHandler(e, file.url)}
+                // onClick={() => onVisualize(file.url)}
                 className="text-xl font-semibold text-white border-2 rounded-lg p-3 w-[200px] cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide"
               >
                 Görüntüle
               </button>
-			 <div>{htmlPart?htmlPart:""}</div>
+              {/* <div>{htmlPart ? htmlPart : ""}</div> */}
             </div>
           </div>
         ))
