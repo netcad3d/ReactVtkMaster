@@ -6,8 +6,8 @@ const fs = require("fs");
 const path = require("path");
 
 const app = express();
-var originFiles=[];
-var allFiles=[];
+var originFiles = [];
+var allFiles = [];
 app.use(cors());
 app.use(express.static("uploads"));
 
@@ -42,8 +42,8 @@ app.get("/fetchFiles", (req, res) => {
     const name = path.basename(file, extension);
     const size = fs.statSync(path.join(__dirname, "uploads", file)).size;
     const url = `http://localhost:3000/uploads/${file}`;
-	console.log(url);
-	FILE=file;
+    console.log(url);
+    FILE = file;
     const idG = id++;
 
     response.push({
@@ -54,26 +54,24 @@ app.get("/fetchFiles", (req, res) => {
       idG,
     });
   }),
-  allFiles= allFiles.concat(response);
-    res.send(response);
+    (allFiles = allFiles.concat(response));
+  res.send(response);
 });
 
-app.get("/uploads/:url",(req,res)=>{
-	let filename = req.params.url;
-	let realUrl="http://localhost:3000/uploads/" + filename;
-//
-	res.download(__dirname +"/uploads/"+filename , function(err) {
-        if(err) {
-            console.log(err);
-        }
-    })
-	/*console.log("send file "+__dirname+"/uploads/"+filename);
+app.get("/uploads/:url", (req, res) => {
+  let filename = req.params.url;
+  let realUrl = "http://localhost:3000/uploads/" + filename;
+  //
+  res.download(__dirname + "/uploads/" + filename, function (err) {
+    if (err) {
+      console.log(err);
+    }
+  });
+  /*console.log("send file "+__dirname+"/uploads/"+filename);
 	console.log(realUrl);
 	var foundFile=allFiles.find(file=>file.url==realUrl);
-	console.log(foundFile)*/;
-
-
-})
+	console.log(foundFile)*/
+});
 
 app.delete("/deleteFile/:name", (req, res) => {
   const name = req.params.name;

@@ -5,3 +5,18 @@
 * {
   background-color: #0b1736;
 }
+
+.VolumeController-module_container__2HNSO {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  top: 50%;
+  left: 25px;
+  background: rgba(128, 128, 128, 0.5);
+  border-radius: 5px;
+  padding: 2px;
+  border: 0.5px solid black;
+  box-sizing: border-box;
+}
