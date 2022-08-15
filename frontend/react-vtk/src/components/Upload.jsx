@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import {useNavigate} from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -56,7 +55,7 @@ const Upload = ({ onSuccess }) => {
   };
 
   return (
-    <>
+    <div className="flex flex-col">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -82,8 +81,7 @@ const Upload = ({ onSuccess }) => {
             className="text-xl font-semibold text-white bg-secondary inline-block rounded-lg cursor-pointer p-3 border-2 hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide mr-[100px]"
             style={{ fontFamily: '"Exo-2", sans-serif' }}
           >
-			Vtk 
-            Dosyası Seç
+            Vtk Dosyası Seç
           </label>
           <button
             className="text-xl font-semibold text-white border-2 rounded-lg p-3 w-[100px] cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide"
@@ -93,15 +91,13 @@ const Upload = ({ onSuccess }) => {
           </button>
         </form>
       </div>
-	  <div className="border-2 p-2 flex items-center border-secondary rounded-md">
-	  <button className="text-lg font-semibold text-white border-2 rounded-lg p-3 w-[100px] cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide" onClick={()=> navigate('/VolumeViewer')}>
-	  <label
-            className="text-xl font-semibold text-white bg-secondary inline-block rounded-lg cursor-pointer p-3 border-2 hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in"
-            style={{ fontFamily: '"Exo-2", sans-serif' }}
-          >Vti Dosyası Görüntüle</label>
-		  </button>	
-	  </div>
-    </>
+      <button
+        className="text-xl font-semibold text-white border-2 rounded-lg p-3 cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide mt-4"
+        onClick={() => navigate("/VolumeClip")}
+      >
+        Vti Dosyası Görüntüle
+      </button>
+    </div>
   );
 };
 
