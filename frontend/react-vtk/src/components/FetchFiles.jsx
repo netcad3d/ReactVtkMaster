@@ -78,7 +78,7 @@ const FetchFiles = ({handleUrl}) => {
 
 	setHtmlPart(<div>
 		<Routes>
-			 <Route path="*" element={<SphereClip url={url}/>} />
+			 <Route path="*" element={<Poly url={url}/>} />
 		</Routes>
 	</div>);
 	
