@@ -1,10 +1,9 @@
 import { useRef, useEffect } from "react";
-import style from "../Styling/geometryViewer.module.css";
 
 import "@kitware/vtk.js/Rendering/Profiles/Geometry";
+import style from "../Styling/geometryViewer.module.css";
 
 import { formatBytesToProperUnit, debounce } from "@kitware/vtk.js/macros";
-import HttpDataAccessHelper from "@kitware/vtk.js/IO/Core/DataAccessHelper/HttpDataAccessHelper";
 import vtkActor from "@kitware/vtk.js/Rendering/Core/Actor";
 import vtkDataArray from "@kitware/vtk.js/Common/Core/DataArray";
 import vtkScalarBarActor from "@kitware/vtk.js/Rendering/Core/ScalarBarActor";
@@ -82,7 +81,7 @@ const GeometryViewer = () => {
 
   const addDataSetButton = document.createElement("img");
   addDataSetButton.setAttribute("class", style.button);
-  addDataSetButton.setAttribute("src", icon);
+  // addDataSetButton.setAttribute("src", icon);
   addDataSetButton.addEventListener("click", () => {
     const isVisible = rootControllerContainer.style.display !== "none";
     rootControllerContainer.style.display = isVisible ? "none" : "flex";
@@ -544,20 +543,20 @@ const GeometryViewer = () => {
     }
 
     load(myContainer, userParams);
-
-    useEffect(() => {
-      if (!context.current) {
-        // Auto setup if no method get called within 100ms
-        setTimeout(() => {
-          if (autoInit) {
-            initLocalFileLoader();
-          }
-        }, 100);
-
-        context.current = {};
-      }
-    }, [vtkContainerRef]);
   }
+
+  useEffect(() => {
+    if (!context.current) {
+      // Auto setup if no method get called within 100ms
+      setTimeout(() => {
+        if (autoInit) {
+          initLocalFileLoader();
+        }
+      }, 100);
+
+      context.current = {};
+    }
+  }, [vtkContainerRef]);
 
   return (
     <div>

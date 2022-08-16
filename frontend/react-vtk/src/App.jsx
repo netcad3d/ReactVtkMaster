@@ -10,6 +10,7 @@ import SphereClip from "./components/SphereClip";
 import VolumeClip from "./components/VolumeClip";
 import VolumeViewer from "./components/VolumeViewer";
 import GeometryViewer from "./components/GeometryViewer";
+import Three from "./components/Three";
 
 function App() {
   const [realUrl, setRealUrl] = useState("");
@@ -25,6 +26,7 @@ function App() {
       <Route path="/VolumeViewer" element={<VolumeViewer />} />
       <Route path="/VolumeClip" element={<VolumeClip />} />
       <Route path="/GeometryViewer" element={<GeometryViewer />} />
+      <Route path="/Three" element={<Three />} />
     </Routes>
   );
 }
