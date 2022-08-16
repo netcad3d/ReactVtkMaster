@@ -77,7 +77,7 @@ const GeometryViewer = () => {
   // ----------------------------------------------------------------------------
 
   const rootControllerContainer = document.createElement("div");
-  rootControllerContainer.setAttribute("class", style.rootController);
+  rootControllerContainer.setAttribute("class", style.rootControl);
 
   const addDataSetButton = document.createElement("img");
   addDataSetButton.setAttribute("class", style.button);
@@ -197,7 +197,7 @@ const GeometryViewer = () => {
     immersionSelector.innerHTML = "Start AR";
 
     const controlContainer = document.createElement("div");
-    controlContainer.setAttribute("class", style.control);
+    controlContainer.setAttribute("class", style.moduleControl);
     controlContainer.appendChild(labelSelector);
     controlContainer.appendChild(representationSelector);
     controlContainer.appendChild(presetSelector);

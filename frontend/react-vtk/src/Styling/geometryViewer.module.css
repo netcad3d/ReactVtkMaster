@@ -14,7 +14,7 @@
   justify-content: center;
 }
 
-.GeometryViewer-module-rootController_uBiGG {
+.rootControl {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -24,11 +24,12 @@
   z-index: 1;
 }
 
-.GeometryViewer-module-control_LaXi4 {
+.moduleControl {
   display: flex;
   flex-direction: row;
   flex: 1;
   align-items: center;
+  color: white;
 }
 
 .bigFileDrop {
