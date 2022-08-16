@@ -29,3 +29,26 @@
     @apply text-xl font-semibold text-white border-2 bg-secondary rounded-lg p-3 w-[100px] cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide;
   }
 }
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #3333 #61616133;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #0b1736;
+}
+
+*::-webkit-scrollbar-thumb {
+  opacity: 1.5;
+  background-color: #13285d;
+  border-radius: 10px;
+  border: 2px solid #0b1736;
+}

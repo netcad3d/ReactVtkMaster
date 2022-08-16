@@ -94,7 +94,7 @@ const FetchFiles = ({ handleUrl }) => {
   return (
     <>
       <button
-        className="text-xl font-semibold text-white border-2 rounded-lg p-3 w-[200px] cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide"
+        className="btn-primary md:w-[200px] mt-3 w-full"
         onClick={fetchButton}
       >
         Dosyaları Getir
@@ -109,9 +109,9 @@ const FetchFiles = ({ handleUrl }) => {
         files.map((file, index) => (
           <div
             key={index}
-            className="w-full p-3 mt-5 rounded-lg border-2 border-secondary flex justify-between items-center"
+            className="flex w-full p-3 mt-5 rounded-lg border-2 border-secondary justify-between items-center flex-col md:flex-row"
           >
-            <div className="flex flex-col">
+            <div className="flex flex-col w-full">
               <p className="text-white text-lg">
                 <span className="text-secondary">File Name: </span>
                 {file.name}
@@ -124,13 +124,13 @@ const FetchFiles = ({ handleUrl }) => {
                 <span className="text-secondary">File Size: </span>{" "}
                 {file.size / 1000000} mb
               </p>
-              <p className="text-white text-lg">
-                <span className="text-secondary">File Url: </span> {file.url}
+              <p className="text-white text-lg hidden md:block">
+                <span className="text-secondary ">File Url: </span> {file.url}
               </p>
             </div>
-            <div className="justify-end">
+            <div className="flex justify-end mt-3 md:mt-0 flex-col md:flex-row w-full">
               <button
-                className="text-xl font-semibold text-white border-2 rounded-lg p-3 w-[200px] cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide mr-2"
+                className="text-lg md:text-xl font-semibold btn-primary mr-2 w-full md:w-[200px]"
                 onClick={(e) => deleteFile(e, file.name)}
               >
                 Dosyayı Sil
@@ -138,11 +138,10 @@ const FetchFiles = ({ handleUrl }) => {
               <button
                 onClick={(e) => viewFileHandler(e, file.url)}
                 // onClick={() => onVisualize(file.url)}
-                className="text-xl font-semibold text-white border-2 rounded-lg p-3 w-[200px] cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide"
+                className="text-lg md:text-xl font-semibold btn-primary w-full md:w-[200px] mt-2 md:mt-0"
               >
                 Görüntüle
               </button>
-              {/* <div>{htmlPart ? htmlPart : ""}</div> */}
             </div>
           </div>
         ))

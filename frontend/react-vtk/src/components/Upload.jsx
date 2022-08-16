@@ -55,7 +55,7 @@ const Upload = ({ onSuccess }) => {
   };
 
   return (
-    <div className="flex flex-col sm:w-full md:w-[500px]">
+    <div className="flex flex-col w-full md:w-[500px] items-center justify-center mb-3 md:mb-0">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -67,7 +67,7 @@ const Upload = ({ onSuccess }) => {
         draggable
         pauseOnHover
       />
-      <div className="border-2 p-10 flex items-center border-secondary rounded-lg w-full sm:mt-30">
+      <div className="border-2 p-10 flex items-center border-secondary rounded-lg w-[90%] xs:mt-30">
         <form
           action="#"
           method="post"
@@ -84,13 +84,13 @@ const Upload = ({ onSuccess }) => {
           />
           <label
             htmlFor="file-input"
-            className="btn-secondary sm:w-full text-center"
+            className="btn-secondary w-full text-center"
             style={{ fontFamily: '"Exo-2", sans-serif' }}
           >
             VTK Dosyası Seç
           </label>
           <button
-            className="btn-primary sm:w-full text-center mt-5"
+            className="btn-primary w-full text-center mt-5"
             style={{ fontFamily: '"Exo-2", sans-serif' }}
           >
             Yükle
@@ -98,13 +98,13 @@ const Upload = ({ onSuccess }) => {
         </form>
       </div>
       <button
-        className="btn-primary w-full mt-4"
+        className="btn-primary w-[90%] mt-4"
         onClick={() => navigate("/VolumeClip")}
       >
         VTI Dosyası Görüntüle
       </button>
       <button
-        className="btn-primary w-full mt-4"
+        className="btn-primary w-[90%] mt-4"
         onClick={() => navigate("/GeometryViewer")}
       >
         VTP Dosyası Görüntüle
