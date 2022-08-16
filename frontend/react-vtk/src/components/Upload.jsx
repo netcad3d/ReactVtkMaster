@@ -55,7 +55,7 @@ const Upload = ({ onSuccess }) => {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col sm:w-full md:w-[500px]">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -67,8 +67,14 @@ const Upload = ({ onSuccess }) => {
         draggable
         pauseOnHover
       />
-      <div className="border-2 p-10 flex items-center border-secondary rounded-lg">
-        <form action="#" method="post" id="#" onSubmit={onSubmit}>
+      <div className="border-2 p-10 flex items-center border-secondary rounded-lg w-full sm:mt-30">
+        <form
+          action="#"
+          method="post"
+          id="#"
+          onSubmit={onSubmit}
+          className="flex flex-col w-full"
+        >
           <input
             type="file"
             id="file-input"
@@ -78,13 +84,13 @@ const Upload = ({ onSuccess }) => {
           />
           <label
             htmlFor="file-input"
-            className="text-xl font-semibold text-white bg-secondary inline-block rounded-lg cursor-pointer p-3 border-2 hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide mr-[100px]"
+            className="btn-secondary sm:w-full text-center"
             style={{ fontFamily: '"Exo-2", sans-serif' }}
           >
             VTK Dosyası Seç
           </label>
           <button
-            className="text-xl font-semibold text-white border-2 rounded-lg p-3 w-[100px] cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide"
+            className="btn-primary sm:w-full text-center mt-5"
             style={{ fontFamily: '"Exo-2", sans-serif' }}
           >
             Yükle
@@ -92,13 +98,13 @@ const Upload = ({ onSuccess }) => {
         </form>
       </div>
       <button
-        className="text-xl font-semibold text-white border-2 rounded-lg p-3 cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide mt-4"
+        className="btn-primary w-full mt-4"
         onClick={() => navigate("/VolumeClip")}
       >
         VTI Dosyası Görüntüle
       </button>
       <button
-        className="text-xl font-semibold text-white border-2 rounded-lg p-3 cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide mt-4"
+        className="btn-primary w-full mt-4"
         onClick={() => navigate("/GeometryViewer")}
       >
         VTP Dosyası Görüntüle

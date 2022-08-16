@@ -13,9 +13,9 @@ const Home = () => {
 
   return (
     <div className="flex flex-col justify-center items-center bg-primary">
-      <div className="flex w-full h-[70vh] justify-center items-center">
+      <div className="flex w-full h-[70vh] justify-center items-center md:flex-row sm:flex-col">
         <div
-          className="flex h-[300px] justify-center items-center"
+          className="flex h-[500px] justify-center items-center"
           style={{ flex: 1 }}
         >
           <Upload onSuccess={onSuccess} />
