@@ -12,7 +12,7 @@ import SphereClip from "./SphereClip";
 const FetchFiles = ({ handleUrl }) => {
   const [files, setFiles] = useState([]);
   const [urlTo, seturlTo] = useState("");
-  const [urls,setUrls]=useState([]);
+  const [urls, setUrls] = useState([]);
   const [htmlPart, setHtmlPart] = useState(null);
   const navigate = useNavigate();
 
@@ -91,26 +91,28 @@ const FetchFiles = ({ handleUrl }) => {
     e.preventDefault();
     navigate(`/poly`, { state: { url } });
   };
-  
+
   const viewAllAVtkFiles = (e, files) => {
     e.preventDefault();
     navigate(`/ManyRenderers`, { state: { files } });
   };
 
   return (
-    <>	<button
-	className="btn-primary text-lg md:w-[200px] mt-3 w-full mr-1"
-	onClick={(e) => viewAllAVtkFiles(e, files)}
-  >
-	Tümünü Görüntüle
-  </button>
-
-      <button
-        className="btn-primary md:w-[200px] mt-3 w-full"
-        onClick={fetchButton}
-      >
-        Dosyaları Getir
-      </button>
+    <>
+      <div className="flex items-center">
+        <button
+          className="btn-primary text-lg md:w-[200px] mt-3 w-full mr-1"
+          onClick={(e) => viewAllAVtkFiles(e, files)}
+        >
+          Tümünü Görüntüle
+        </button>
+        <button
+          className="btn-primary md:w-[200px] mt-3 w-full"
+          onClick={fetchButton}
+        >
+          Dosyaları Getir
+        </button>
+      </div>
       {files.length === 0 ? (
         <div className="w-full p-3 mt-5 rounded-lg border-2 border-secondary flex flex-col">
           <div className="text-white text-2xl font-semibold tracking-wide text-center">
@@ -119,18 +121,14 @@ const FetchFiles = ({ handleUrl }) => {
         </div>
       ) : (
         files.map((file, index) => (
-			
-			
           <div
             key={index}
             className="flex w-full p-3 mt-5 rounded-lg border-2 border-secondary justify-between items-center flex-col md:flex-row"
           >
             <div className="flex flex-col w-full">
-
               <p className="text-white text-lg">
                 <span className="text-secondary">File Name: </span>
                 {file.name}
-				
               </p>
               <p className="text-white text-lg">
                 <span className="text-secondary">File Extension: </span>{" "}
