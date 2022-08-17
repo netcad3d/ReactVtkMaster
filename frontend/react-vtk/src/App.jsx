@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 
 import Home from "./pages/Home";
 import Clip from "./components/Clip";
@@ -20,44 +21,47 @@ function App() {
     setRealUrl(url);
   };
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/poly" element={<Poly />} />
-      <Route path="/clip" element={<Clip />} />
-      <Route path="/sphereClip" element={<SphereClip />} />
-      <Route path="/VolumeViewer" element={<VolumeViewer />} />
-      <Route path="/VolumeClip" element={<VolumeClip />} />
-      <Route path="/GeometryViewer" element={<GeometryViewer />} />
-      <Route
-        path="/ManyRenderers"
-        element={<ManyRenderers></ManyRenderers>}
-      ></Route>
-      <Route path="/Three" element={<Three />} />
-      <Route
-        path="/signup"
-        element={
-          <Auth
-            title="Hesap Oluştur"
-            button="Kaydol"
-            navigate="Hesabınız var mı?"
-            navigateTitle="Oturum Aç"
-            navigateLink="/login"
-          />
-        }
-      />
-      <Route
-        path="/login"
-        element={
-          <Auth
-            title="Oturum Aç"
-            button="Giriş Yap"
-            navigate="Kullanıcı hesabınız yok mu?"
-            navigateTitle="Hesap Oluştur"
-            navigateLink="/signup"
-          />
-        }
-      />
-    </Routes>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/poly" element={<Poly />} />
+        <Route path="/clip" element={<Clip />} />
+        <Route path="/sphereClip" element={<SphereClip />} />
+        <Route path="/VolumeViewer" element={<VolumeViewer />} />
+        <Route path="/VolumeClip" element={<VolumeClip />} />
+        <Route path="/GeometryViewer" element={<GeometryViewer />} />
+        <Route
+          path="/ManyRenderers"
+          element={<ManyRenderers></ManyRenderers>}
+        ></Route>
+        <Route path="/Three" element={<Three />} />
+        <Route
+          path="/signup"
+          element={
+            <Auth
+              title="Hesap Oluştur"
+              button="Kaydol"
+              navigate="Hesabınız var mı?"
+              navigateTitle="Oturum Aç"
+              navigateLink="/login"
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <Auth
+              title="Oturum Aç"
+              button="Giriş Yap"
+              navigate="Kullanıcı hesabınız yok mu?"
+              navigateTitle="Hesap Oluştur"
+              navigateLink="/signup"
+            />
+          }
+        />
+      </Routes>
+    </>
   );
 }
 export default App;
