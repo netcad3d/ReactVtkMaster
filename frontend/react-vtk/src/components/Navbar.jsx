@@ -17,7 +17,11 @@ const Navbar = () => {
                   to="/"
                   style={{ color: "inherit", backgroundColor: "inherit" }}
                 >
-                  Netcad
+                  <img
+                    src="https://assets.website-files.com/5f843092670b460a40be7d22/5fd8941bc89b53a151d3b1c0_netcad-logo.png"
+                    alt="logo"
+                    className="w-30 h-10 ml-3"
+                  />
                 </NavLink>
               </div>
             </span>
@@ -48,7 +52,7 @@ const Navbar = () => {
               >
                 <div
                   className={`flex md:ml-8 ml-0 md:block 
-                  duration-500`}
+                  duration-500 text-lg hover:text-primary`}
                 >
                   Anasayfa
                 </div>
@@ -63,7 +67,7 @@ const Navbar = () => {
               >
                 <div
                   className={`flex md:ml-8 ml-0 md:block 
-                  duration-500`}
+                  duration-500 text-lg hover:text-primary`}
                 >
                   Giriş Yap
                 </div>
@@ -78,7 +82,7 @@ const Navbar = () => {
               >
                 <div
                   className={`flex md:ml-8 ml-0 md:block 
-                  duration-500`}
+                  duration-500 text-lg hover:text-primary`}
                 >
                   Kaydol
                 </div>
