@@ -11,7 +11,7 @@ import VolumeClip from "./components/VolumeClip";
 import VolumeViewer from "./components/VolumeViewer";
 import GeometryViewer from "./components/GeometryViewer";
 import Three from "./components/Three";
-import Signup from "./components/Signup";
+import Auth from "./components/Auth";
 import ManyRenderers from "./components/ManyRenderers";
 
 function App() {
@@ -33,7 +33,30 @@ function App() {
         element={<ManyRenderers></ManyRenderers>}
       ></Route>
       <Route path="/Three" element={<Three />} />
-      <Route path="/signup" element={<Signup />} />
+      <Route
+        path="/signup"
+        element={
+          <Auth
+            title="Hesap Oluştur"
+            button="Kaydol"
+            navigate="Hesabınız var mı?"
+            navigateTitle="Oturum Aç"
+            navigateLink="/login"
+          />
+        }
+      />
+      <Route
+        path="/login"
+        element={
+          <Auth
+            title="Oturum Aç"
+            button="Giriş Yap"
+            navigate="Kullanıcı hesabınız yok mu?"
+            navigateTitle="Hesap Oluştur"
+            navigateLink="/signup"
+          />
+        }
+      />
     </Routes>
   );
 }
