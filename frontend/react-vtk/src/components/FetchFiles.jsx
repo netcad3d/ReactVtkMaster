@@ -5,9 +5,9 @@ import Poly from "./Poly";
 import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import { Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import SphereClip from "./SphereClip";
+
+import Swal from "sweetalert2";
 
 const FetchFiles = ({ handleUrl }) => {
   const [files, setFiles] = useState([]);
@@ -42,39 +42,55 @@ const FetchFiles = ({ handleUrl }) => {
 
   const deleteFile = (e, name) => {
     e.preventDefault();
-    axios
-      .delete(`http://localhost:3000/deleteFile/${name}`)
-      .then((res) => {
-        res.status === 200
-          ? toast.success("File Deleted Succesfully", {
-              position: "top-right",
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "dark",
-            })
-          : toast.error("Error Deleting File", {
-              position: "top-right",
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "dark",
-            });
-        setFiles(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
 
-    setTimeout(() => {
-      fetchButton(e);
-    }, 0);
+    Swal.fire({
+      title: "Emin misin gardaş?",
+      text: "Bakhele!! Bu işlem geri döndürülemez!",
+      icon: "warning",
+      showCancelButton: true,
+      cancelButtonText: "Yoo Silme!",
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Evet, sil gardaş!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Başarıyla silindi!", "Silindi Babuş", "success");
+
+        axios
+          .delete(`http://localhost:3000/deleteFile/${name}`)
+          .then((res) => {
+            res.status === 200
+              ? toast.success("Başarıyla silindi.", {
+                  position: "top-right",
+                  autoClose: 2000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                })
+              : toast.error("Silerken hata oluştu babuş.", {
+                  position: "top-right",
+                  autoClose: 2000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                });
+            setFiles(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+
+      setTimeout(() => {
+        fetchButton(e);
+      }, 0);
+    });
   };
 
   // function onVisualize(url) {
@@ -94,7 +110,18 @@ const FetchFiles = ({ handleUrl }) => {
 
   const viewAllAVtkFiles = (e, files) => {
     e.preventDefault();
-    navigate(`/ManyRenderers`, { state: { files } });
+
+    if (files.length === 0) {
+      Swal.fire({
+        title: "Hata",
+        text: "Lütfen bir dosya seçiniz!",
+        icon: "error",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Tamam",
+      });
+    } else {
+      navigate(`/ManyRenderers`, { state: { files } });
+    }
   };
 
   return (

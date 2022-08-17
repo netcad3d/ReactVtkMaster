@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Upload = ({ onSuccess }) => {
   const [files, setFiles] = useState([]);
@@ -23,35 +24,43 @@ const Upload = ({ onSuccess }) => {
       data.append("file", files[i]);
     }
 
-    axios
-      .post("http://localhost:3000/upload", data)
-      .then((res) => {
-        res.status === 200
-          ? toast.success("File Uploaded Succesfully", {
-              position: "top-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "dark",
-            })
-          : toast.error("Error Uploading Files", {
-              position: "top-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "dark",
-            });
-        onSuccess(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
+    if (files.length === 0) {
+      Swal.fire({
+        title: "Hata",
+        text: "Lütfen bir dosya seçiniz!",
+        icon: "error",
       });
+    } else {
+      axios
+        .post("http://localhost:3000/upload", data)
+        .then((res) => {
+          res.status === 200
+            ? toast.success("Başarıyla Yüklendi.", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+              })
+            : toast.error("Yüklerken Hata Oluştu", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+              });
+          onSuccess(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
