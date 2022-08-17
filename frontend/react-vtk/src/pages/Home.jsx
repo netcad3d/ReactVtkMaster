@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 import Upload from "../components/Upload";
 import Preview from "../components/Preview";
 import FetchFiles from "../components/FetchFiles";
@@ -45,12 +46,6 @@ const Home = () => {
         <h1 className="text-2xl text-white font-semibold tracking-wide text-center mt-3">
           Serverdaki Dosyalar
         </h1>
-		<button
-        className="btn-primary text-lg md:w-[200px] mt-3 w-full mr-1"
-        onClick={() => navigate("/ManyRenderers")}
-      >
-        Tümünü Görüntüle
-      </button>
         <FetchFiles />
       </div>
     </div>
