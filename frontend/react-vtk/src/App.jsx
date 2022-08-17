@@ -30,6 +30,7 @@ function App() {
       <Route path="/GeometryViewer" element={<GeometryViewer />} />
       <Route path="/Three" element={<Three />} />
       <Route path="/ManyRenderers" element={<ManyRenderers />} />
+      <Route path="/signup" element={<Signup />} />
     </Routes>
   );
 }
