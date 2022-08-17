@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import "@kitware/vtk.js/favicon";
 
+import vtkPolyDataReader from "@kitware/vtk.js/IO/Legacy/PolyDataReader";
 // Load the rendering pieces we want to use (for both WebGL and WebGPU)
 import "@kitware/vtk.js/Rendering/Profiles/Geometry";
 import "@kitware/vtk.js/Rendering/Misc/RenderingAPIs";
@@ -46,8 +47,7 @@ const ManyRenderers = () => {
       addMesh("Cube", vtkCubeSource.newInstance());
       addMesh("Cylinder", vtkCylinderSource.newInstance());
 
-	  ///read and rendervtk files
-	 
+	
 
       // ----------------------------------------------------------------------------
       // Properties
@@ -202,7 +202,10 @@ const ManyRenderers = () => {
         }
       }
 
-      function addRenderer() {
+	    ///read and rendervtk files
+
+      function addRenderer(url) {
+		console.log(url);
         const mesh = meshes[meshIndex];
         const prop = properties[propertyIndex];
         const background = colors[bgIndex];
@@ -224,6 +227,24 @@ const ManyRenderers = () => {
         const renderer = vtkRenderer.newInstance({ background });
         container.innerHTML = `${mesh.name} ${prop.name}`;
 
+		const reader = vtkPolyDataReader.newInstance();
+
+		reader.setUrl(`${url}`).then(() => {
+			const polydata = reader.getOutputData(0);
+			const mapper = vtkMapper.newInstance();
+			const actor = vtkActor.newInstance();
+	
+			actor.setMapper(mapper);
+			mapper.setInputData(polydata);
+	
+
+			renderer.addActor(actor);
+			renderWindow.addRenderer(renderer);
+			updateViewPort(container, renderer);
+			renderer.resetCamera();
+
+		  });
+
         container.addEventListener("pointerenter", () =>
           bindInteractor(renderer, container)
         );
@@ -231,10 +252,7 @@ const ManyRenderers = () => {
           bindInteractor(null, null)
         );
 
-        renderer.addActor(actor);
-        renderWindow.addRenderer(renderer);
-        updateViewPort(container, renderer);
-        renderer.resetCamera();
+    
 
         // Keep track of renderer
         RENDERERS[container.id] = renderer;
@@ -259,9 +277,14 @@ const ManyRenderers = () => {
       document.body.appendChild(label);
       document.body.appendChild(document.createElement("br"));
 
-      for (let i = 0; i < 64; i++) {
-        addRenderer();
-      }
+	  files.forEach((file)=>{
+		addRenderer(file.url);
+	 })
+
+
+     // for (let i = 0; i < 2; i++) {
+      //  addRenderer(url);
+      //}
       resize();
 
       function updateCamera(renderer) {
@@ -293,7 +316,7 @@ const ManyRenderers = () => {
   }, [vtkContainerRef]);
 
   return (
-    <div>
+    <div className="mt-[90px]">
       <div ref={vtkContainerRef} />
     </div>
   );
