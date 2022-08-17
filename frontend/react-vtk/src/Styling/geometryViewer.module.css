@@ -29,7 +29,7 @@
   flex-direction: row;
   flex: 1;
   align-items: center;
-  color: white;
+  color: black;
 }
 
 .bigFileDrop {
@@ -43,7 +43,7 @@
   background-position: center;
   background-size: contain;
   border-radius: 10px;
-  width: 50px;
-  padding: calc(50vh - 2em) calc(50vw - 25px - 2em);
+  width: 70%;
+  height: 70%;
   cursor: pointer;
 }
