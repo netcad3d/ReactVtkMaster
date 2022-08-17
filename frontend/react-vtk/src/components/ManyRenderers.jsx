@@ -24,7 +24,7 @@ import vtkInteractorStyleTrackballCamera from '@kitware/vtk.js/Interaction/Style
 //
 
 const ManyRenderers = () => {
-	// const {url}=props;
+	// /const {url}=props;
 	const { state } = useLocation();
 
 
