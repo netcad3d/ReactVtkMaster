@@ -28,7 +28,7 @@ function App() {
       <Route path="/VolumeClip" element={<VolumeClip />} />
       <Route path="/GeometryViewer" element={<GeometryViewer />} />
       <Route path="/Three" element={<Three />} />
-      <Route path="/Signup" element={<Signup />} />
+      <Route path="/signup" element={<Signup />} />
     </Routes>
   );
 }
