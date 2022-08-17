@@ -276,8 +276,10 @@ const ManyRenderers = () => {
       document.body.appendChild(checkbox);
       document.body.appendChild(label);
       document.body.appendChild(document.createElement("br"));
+	  // filter vtk files
+	 const filteredFiles= files.filter(file=>file.extension ==='.vtk');
 
-	  files.forEach((file)=>{
+	  filteredFiles.forEach((file)=>{
 		addRenderer(file.url);
 	 })
 
