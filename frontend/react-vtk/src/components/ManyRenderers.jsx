@@ -26,6 +26,8 @@ import vtkInteractorStyleTrackballCamera from "@kitware/vtk.js/Interaction/Style
 const ManyRenderers = () => {
   // /const {url}=props;
   const { state } = useLocation();
+  const { files} = state;
+  console.log(files);
 
   const vtkContainerRef = useRef(null);
   const context = useRef(null);
@@ -43,6 +45,9 @@ const ManyRenderers = () => {
       addMesh("Sphere", vtkSphereSource.newInstance());
       addMesh("Cube", vtkCubeSource.newInstance());
       addMesh("Cylinder", vtkCylinderSource.newInstance());
+
+	  ///read and rendervtk files
+	 
 
       // ----------------------------------------------------------------------------
       // Properties
