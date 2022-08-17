@@ -4,9 +4,11 @@ import Upload from "../components/Upload";
 import Preview from "../components/Preview";
 import FetchFiles from "../components/FetchFiles";
 import Clip from "../components/Clip";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [files, setFiles] = useState([]);
+  const navigate = useNavigate();
   const onSuccess = (savedFiles) => {
     setFiles(savedFiles);
   };
@@ -44,8 +46,16 @@ const Home = () => {
           <h1 className="text-2xl text-white font-semibold tracking-wide text-center">
             Serverdaki Dosyalar
           </h1>
+
         </div>
+		<button
+				className="text-lg font-semibold text-white border-2 rounded-lg p-3 w-[200px] cursor-pointer hover:bg-white hover:text-secondary hover:border-secondary transition-all duration-200 ease-in tracking-wide"
+				onClick={() => navigate("/ManyRenderers")}
+			>
+				Tümünü Görüntüle
+		</button>
         <FetchFiles />
+	
       </div>
     </div>
   );
