@@ -45,14 +45,14 @@ const Navbar = () => {
           >
             <li className="flex mr-5 md:mt-2 mt-10 text-white">
               <NavLink
-                className="italic md:not-italic text-sm flex items-center gap-x-4
+                className="text-sm flex items-center gap-x-4
                     cursor-pointer "
                 to="/"
                 style={{ color: "inherit", backgroundColor: "inherit" }}
               >
                 <div
                   className={`flex md:ml-8 ml-0 md:block 
-                  duration-500 text-lg hover:text-primary`}
+                  duration-500 text-lg`}
                 >
                   Anasayfa
                 </div>
@@ -60,14 +60,14 @@ const Navbar = () => {
             </li>
             <li className="flex mr-5 md:mt-2 mt-10 text-white">
               <NavLink
-                className="italic md:not-italic text-sm flex items-center gap-x-4
+                className="text-sm flex items-center gap-x-4
                     cursor-pointer "
                 to="/login"
                 style={{ color: "inherit", backgroundColor: "inherit" }}
               >
                 <div
                   className={`flex md:ml-8 ml-0 md:block 
-                  duration-500 text-lg hover:text-primary`}
+                  duration-500 text-lg`}
                 >
                   Giriş Yap
                 </div>
@@ -75,14 +75,14 @@ const Navbar = () => {
             </li>
             <li className="flex mr-5 md:mt-2 mt-10 text-white">
               <NavLink
-                className="italic md:not-italic text-sm flex items-center gap-x-4
+                className="text-sm flex items-center gap-x-4
                     cursor-pointer "
                 to="/signup"
                 style={{ color: "inherit", backgroundColor: "inherit" }}
               >
                 <div
                   className={`flex md:ml-8 ml-0 md:block 
-                  duration-500 text-lg hover:text-primary`}
+                  duration-500 text-lg`}
                 >
                   Kaydol
                 </div>
