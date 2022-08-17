@@ -54,6 +54,7 @@ const Upload = ({ onSuccess }) => {
 			});
 	};
 
+<<<<<<< HEAD
 	return (
 		<div className="flex flex-col sm:w-full md:w-[500px]">
 			<ToastContainer
@@ -111,6 +112,65 @@ const Upload = ({ onSuccess }) => {
 			</button>
 		</div>
 	);
+=======
+  return (
+    <div className="flex flex-col w-full md:w-[500px] items-center justify-center mb-3 md:mb-0">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <div className="border-2 p-10 flex items-center border-secondary rounded-lg w-[90%] xs:mt-30">
+        <form
+          action="#"
+          method="post"
+          id="#"
+          onSubmit={onSubmit}
+          className="flex flex-col w-full"
+        >
+          <input
+            type="file"
+            id="file-input"
+            className="w-[0.1px] h-[0.1px] opacity-0 overflow-hidden absolute z-[-1]"
+            onChange={onInputChange}
+            multiple
+          />
+          <label
+            htmlFor="file-input"
+            className="btn-secondary w-full text-center"
+            style={{ fontFamily: '"Exo-2", sans-serif' }}
+          >
+            VTK Dosyası Seç
+          </label>
+          <button
+            className="btn-primary w-full text-center mt-5"
+            style={{ fontFamily: '"Exo-2", sans-serif' }}
+          >
+            Yükle
+          </button>
+        </form>
+      </div>
+      <button
+        className="btn-primary w-[90%] mt-4"
+        onClick={() => navigate("/VolumeClip")}
+      >
+        VTI Dosyası Görüntüle
+      </button>
+      <button
+        className="btn-primary w-[90%] mt-4"
+        onClick={() => navigate("/GeometryViewer")}
+      >
+        VTP Dosyası Görüntüle
+      </button>
+    </div>
+  );
+>>>>>>> master
 };
 
 export default Upload;
