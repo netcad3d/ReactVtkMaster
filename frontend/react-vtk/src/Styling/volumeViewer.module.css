@@ -11,5 +11,6 @@
   border-radius: 10px;
   width: 70%;
   height: 70%;
+  z-index: 0;
   cursor: pointer;
 }

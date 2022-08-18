@@ -465,7 +465,8 @@ const VolumeClip = () => {
   }, [vtkContainerRef]);
 
   return (
-    <div>
+    <div className="h-[100vh] flex flex-col">
+      <div className="w-full h-full bg-black z-[1]"></div>
       <div ref={vtkContainerRef} />
     </div>
   );

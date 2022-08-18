@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import ReactTooltip from "react-tooltip";
+
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -99,7 +101,16 @@ const Upload = ({ onSuccess }) => {
             htmlFor="file-input"
             className="btn-secondary w-full text-center"
             style={{ fontFamily: '"Exo-2", sans-serif' }}
+            data-for="upload"
+            data-tip="Legacy Poly Data File"
           >
+            <ReactTooltip
+              id="upload"
+              effect="solid"
+              backgroundColor="#13285d"
+              borderColor="#00BCEF"
+              border={true}
+            />
             NC3 Dosyası Seç
           </label>
           <button
