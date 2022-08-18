@@ -6,6 +6,8 @@ const router = express.Router();
 
 const File = require("../models/File");
 
+console.log(process.env.MONGO_URI);
+
 //! Multer Config
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {

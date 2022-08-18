@@ -1,6 +1,7 @@
 require("./models/File");
 
 const express = require("express");
+require("dotenv").config();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -14,8 +15,7 @@ app.use(bodyParser.json());
 app.use(FileOperationsRoute);
 
 //! DB Connection
-const mongoUri =
-  "mongodb+srv://netcadVtk:xAalt8VWrasDmgLI@netcadvtk.j1mtvyr.mongodb.net/?retryWrites=true&w=majority";
+const mongoUri = process.env.MONGO_URI;
 
 mongoose.connect(mongoUri, {
   useNewUrlParser: true,
