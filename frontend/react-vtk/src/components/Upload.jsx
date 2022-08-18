@@ -100,7 +100,7 @@ const Upload = ({ onSuccess }) => {
             className="btn-secondary w-full text-center"
             style={{ fontFamily: '"Exo-2", sans-serif' }}
           >
-            VTK Dosyası Seç
+            NC3 Dosyası Seç
           </label>
           <button
             className="btn-primary w-full text-center mt-5"
