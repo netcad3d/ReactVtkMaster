@@ -41,14 +41,14 @@ const FetchFiles = () => {
     e.preventDefault();
 
     Swal.fire({
-      title: "Emin misin gardaş?",
-      text: "Bakhele!! Bu işlem geri döndürülemez!",
+      title: "Emin misin?",
+      text: "Bu işlem geri döndürülemez!",
       icon: "warning",
       showCancelButton: true,
       cancelButtonText: "Yoo Silme!",
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Evet, sil gardaş!",
+      confirmButtonText: "Evet, sil!",
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire("Başarıyla silindi!", "Silindi Babuş", "success");
@@ -82,11 +82,13 @@ const FetchFiles = () => {
           .catch((err) => {
             console.log(err);
           });
+
+		  setTimeout(() => {
+			fetchButton(e);
+		  }, 0);
       }
 
-      setTimeout(() => {
-        fetchButton(e);
-      }, 0);
+     
     });
   };
 
