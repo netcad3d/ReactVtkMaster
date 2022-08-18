@@ -42,19 +42,9 @@ router.post("/uploads", upload, (req, res) => {
   });
 });
 
-router.get("/fetchFiles", (req, res) => {
-  const allFiles = File.find({});
-
-  allFiles
-    .then((files) => {
-      res.json(files);
-    })
-    .catch((err) => {
-      res.json(err);
-    })
-    .finally(() => {
-      res.end();
-    });
+router.get("/fetchFiles", async (req, res) => {
+  const files = await File.find();
+  res.json(files);
 });
 
 router.delete("/deleteFile/:id", async (req, res) => {
