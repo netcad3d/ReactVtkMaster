@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 import Upload from "../components/Upload";
 import Preview from "../components/Preview";
 import FetchFiles from "../components/FetchFiles";
-
 
 const Home = () => {
   const [files, setFiles] = useState([]);

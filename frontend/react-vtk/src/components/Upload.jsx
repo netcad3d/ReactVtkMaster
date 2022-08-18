@@ -19,6 +19,7 @@ const Upload = ({ onSuccess }) => {
     e.preventDefault();
 
     const data = new FormData();
+    const config = { headers: { "Content-Type": "multipart/form-data" } };
 
     for (let i = 0; i < files.length; i++) {
       data.append("file", files[i]);
@@ -32,7 +33,7 @@ const Upload = ({ onSuccess }) => {
       });
     } else {
       axios
-        .post("http://localhost:3000/upload", data)
+        .post("http://localhost:3000/uploads", data, config)
         .then((res) => {
           res.status === 200
             ? toast.success("Başarıyla Yüklendi.", {
@@ -55,7 +56,9 @@ const Upload = ({ onSuccess }) => {
                 progress: undefined,
                 theme: "dark",
               });
-          onSuccess(res.data);
+          const fileArray = [];
+          fileArray.push(res.data);
+          onSuccess(fileArray);
         })
         .catch((err) => {
           console.log(err);
@@ -82,6 +85,7 @@ const Upload = ({ onSuccess }) => {
           method="post"
           id="#"
           onSubmit={onSubmit}
+          encType="multipart/form-data"
           className="flex flex-col w-full"
         >
           <input

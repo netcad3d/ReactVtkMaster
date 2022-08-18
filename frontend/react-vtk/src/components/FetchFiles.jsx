@@ -9,11 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 import Swal from "sweetalert2";
 
-const FetchFiles = ({ handleUrl }) => {
+const FetchFiles = () => {
   const [files, setFiles] = useState([]);
-  const [urlTo, seturlTo] = useState("");
-  const [urls, setUrls] = useState([]);
-  const [htmlPart, setHtmlPart] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,7 +37,7 @@ const FetchFiles = ({ handleUrl }) => {
       });
   };
 
-  const deleteFile = (e, name) => {
+  const deleteFile = (e, _id) => {
     e.preventDefault();
 
     Swal.fire({
@@ -57,7 +54,7 @@ const FetchFiles = ({ handleUrl }) => {
         Swal.fire("Başarıyla silindi!", "Silindi Babuş", "success");
 
         axios
-          .delete(`http://localhost:3000/deleteFile/${name}`)
+          .delete(`http://localhost:3000/deleteFile/${_id}`)
           .then((res) => {
             res.status === 200
               ? toast.success("Başarıyla silindi.", {
@@ -93,19 +90,10 @@ const FetchFiles = ({ handleUrl }) => {
     });
   };
 
-  // function onVisualize(url) {
-  //   setHtmlPart(
-  //     <div>
-  //       <Routes>
-  //         <Route path="*" element={<Poly url={url} />} />
-  //       </Routes>
-  //     </div>
-  //   );
-  // }
-
-  const viewFileHandler = (e, url) => {
+  const viewFileHandler = (e, filesToSend, _id) => {
     e.preventDefault();
-    navigate(`/poly`, { state: { url } });
+
+    navigate(`/poly`, { state: { filesToSend, _id } });
   };
 
   const viewAllAVtkFiles = (e, files) => {
@@ -124,20 +112,85 @@ const FetchFiles = ({ handleUrl }) => {
     }
   };
 
+  const deleteAll = (files) => {
+    if (files.length === 0) {
+      Swal.fire({
+        title: "Hata",
+        text: "Henüz bir dosya yüklemediniz!",
+        icon: "error",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Tamam",
+      });
+    } else {
+      Swal.fire({
+        title: "Emin misin gardaş?",
+        text: "Bakhele!! Bu işlem geri döndürülemez ve tüm dosyalar silinecektir!",
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonText: "Yoo Silme!",
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Evet, sil gardaş!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Başarıyla silindi!", "Silindi Babuş", "success");
+          axios
+            .delete(`http://localhost:3000/deleteAllFiles`)
+            .then((res) => {
+              res.status === 200
+                ? toast.success("Başarıyla silindi.", {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                  })
+                : toast.error("Silerken hata oluştu babuş.", {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                  });
+              setFiles([]);
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+            .then(() => {
+              fetchButton(e);
+            });
+        }
+      });
+    }
+  };
+
   return (
     <>
       <div className="flex items-center">
         <button
-          className="btn-primary text-lg md:w-[200px] mt-3 w-full mr-1"
+          className="btn-primary text-lg md:w-[200px] mt-3 w-full mr-3"
           onClick={(e) => viewAllAVtkFiles(e, files)}
         >
           Tümünü Görüntüle
         </button>
         <button
-          className="btn-primary md:w-[200px] mt-3 w-full"
+          className="btn-primary md:w-[200px] mt-3 w-full mr-3"
           onClick={fetchButton}
         >
           Dosyaları Getir
+        </button>
+        <button
+          className="btn-primary md:w-[200px] mt-3 w-full"
+          onClick={() => deleteAll(files)}
+        >
+          Tüm Dosyaları Sil
         </button>
       </div>
       {files.length === 0 ? (
@@ -168,16 +221,19 @@ const FetchFiles = ({ handleUrl }) => {
               <p className="text-white text-lg hidden md:block">
                 <span className="text-secondary ">File Url: </span> {file.url}
               </p>
+              <p className="text-white text-lg hidden md:block">
+                <span className="text-secondary ">File Id: </span> {file._id}
+              </p>
             </div>
             <div className="flex justify-end mt-3 md:mt-0 flex-col md:flex-row w-full">
               <button
                 className="text-lg md:text-xl font-semibold btn-primary mr-2 w-full md:w-[200px]"
-                onClick={(e) => deleteFile(e, file.name)}
+                onClick={(e) => deleteFile(e, file._id)}
               >
                 Dosyayı Sil
               </button>
               <button
-                onClick={(e) => viewFileHandler(e, file.url)}
+                onClick={(e) => viewFileHandler(e, files, file._id)}
                 // onClick={() => onVisualize(file.url)}
                 className="text-lg md:text-xl font-semibold btn-primary w-full md:w-[200px] mt-2 md:mt-0"
               >

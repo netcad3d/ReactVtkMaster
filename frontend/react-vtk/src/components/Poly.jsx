@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 import "@kitware/vtk.js/Rendering/Profiles/Geometry";
 
@@ -9,16 +10,22 @@ import vtkMapper from "@kitware/vtk.js/Rendering/Core/Mapper";
 import vtkPolyDataReader from "@kitware/vtk.js/IO/Legacy/PolyDataReader";
 
 const Poly = () => {
-  // const {url}=props;
   const { state } = useLocation();
-  const { url } = state;
+  const { filesToSend, _id } = state;
+
+  const foundFile = filesToSend.find((file) => file._id === _id);
+  const url = foundFile.url;
 
   const vtkContainerRef = useRef(null);
   const context = useRef(null);
 
+  const urlNew = url.replace(
+    `/uploads/${foundFile.origName}`,
+    `/getFile/${_id}`
+  );
+
   useEffect(() => {
     if (!context.current) {
-      console.log(url + "%20-%20sphere.vtk");
       const fullScreenRenderer = vtkFullScreenRenderWindow.newInstance({
         background: [0, 0, 0],
       });
@@ -30,7 +37,7 @@ const Poly = () => {
 
       const reader = vtkPolyDataReader.newInstance();
 
-      reader.setUrl(`${url}`).then(() => {
+      reader.setUrl(`${urlNew}`).then(() => {
         const polydata = reader.getOutputData(0);
         const mapper = vtkMapper.newInstance();
         const actor = vtkActor.newInstance();

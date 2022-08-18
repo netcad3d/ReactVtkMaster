@@ -1,6 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 
 const router = express.Router();
 
@@ -22,14 +23,16 @@ router.post("/uploads", upload, (req, res) => {
   const files = req.files;
 
   files.forEach((file) => {
+    //full name
+    const origName = file.filename;
     const extension = path.extname(file.originalname);
     const name = path.basename(file.originalname, extension);
     const size = file.size;
 
     const url = `http://localhost:3000/uploads/${file.filename}`;
-    console.log(url);
 
     const newFile = new File({
+      origName,
       name,
       extension,
       size,
@@ -48,25 +51,50 @@ router.get("/fetchFiles", async (req, res) => {
 });
 
 router.delete("/deleteFile/:id", async (req, res) => {
-  const id = req.params.id.substring(1);
+  const id = req.params.id;
 
   const file = await File.findById(id);
 
   if (file) {
     await File.findByIdAndDelete(id);
-    res.json({ message: "File deleted" });
+
+    //delete file locally
+    const filePath = path.join(__dirname, "../uploads", file.origName);
+    fs.unlink(filePath, (err) => {
+      if (err) throw err;
+      console.log("File deleted");
+    });
+
+    const files = await File.find();
+    res.json(files);
   } else {
     res.json({ message: "File not found" });
   }
 });
 
+router.delete("/deleteAllFiles", async (req, res) => {
+  await File.deleteMany();
+
+  fs.readdir(path.join(__dirname, "../uploads"), (err, files) => {
+    if (err) throw err;
+    files.forEach((file) => {
+      fs.unlink(path.join(__dirname, "../uploads", file), (err) => {
+        if (err) throw err;
+        console.log("File deleted");
+      });
+    });
+  });
+
+  res.json({ message: "All files deleted" });
+});
+
 router.get("/getFile/:id", async (req, res) => {
-  const id = req.params.id.substring(1);
+  const id = req.params.id;
 
   const file = await File.findById(id);
 
   if (file) {
-    res.download(__dirname + "/../uploads/" + file.filename, (err) => {
+    res.download(__dirname + "/../uploads/" + file.origName, (err) => {
       if (err) {
         console.log(err);
       }

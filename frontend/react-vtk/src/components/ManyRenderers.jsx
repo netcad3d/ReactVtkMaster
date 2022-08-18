@@ -27,8 +27,7 @@ import vtkInteractorStyleTrackballCamera from "@kitware/vtk.js/Interaction/Style
 const ManyRenderers = () => {
   // /const {url}=props;
   const { state } = useLocation();
-  const { files} = state;
-  console.log(files);
+  const { files } = state;
 
   const vtkContainerRef = useRef(null);
   const context = useRef(null);
@@ -46,8 +45,6 @@ const ManyRenderers = () => {
       addMesh("Sphere", vtkSphereSource.newInstance());
       addMesh("Cube", vtkCubeSource.newInstance());
       addMesh("Cylinder", vtkCylinderSource.newInstance());
-
-	
 
       // ----------------------------------------------------------------------------
       // Properties
@@ -202,10 +199,10 @@ const ManyRenderers = () => {
         }
       }
 
-	    ///read and rendervtk files
+      ///read and rendervtk files
 
       function addRenderer(url) {
-		console.log(url);
+        console.log(url);
         const mesh = meshes[meshIndex];
         const prop = properties[propertyIndex];
         const background = colors[bgIndex];
@@ -227,23 +224,21 @@ const ManyRenderers = () => {
         const renderer = vtkRenderer.newInstance({ background });
         container.innerHTML = `${mesh.name} ${prop.name}`;
 
-		const reader = vtkPolyDataReader.newInstance();
+        const reader = vtkPolyDataReader.newInstance();
 
-		reader.setUrl(`${url}`).then(() => {
-			const polydata = reader.getOutputData(0);
-			const mapper = vtkMapper.newInstance();
-			const actor = vtkActor.newInstance();
-	
-			actor.setMapper(mapper);
-			mapper.setInputData(polydata);
-	
+        reader.setUrl(`${url}`).then(() => {
+          const polydata = reader.getOutputData(0);
+          const mapper = vtkMapper.newInstance();
+          const actor = vtkActor.newInstance();
 
-			renderer.addActor(actor);
-			renderWindow.addRenderer(renderer);
-			updateViewPort(container, renderer);
-			renderer.resetCamera();
+          actor.setMapper(mapper);
+          mapper.setInputData(polydata);
 
-		  });
+          renderer.addActor(actor);
+          renderWindow.addRenderer(renderer);
+          updateViewPort(container, renderer);
+          renderer.resetCamera();
+        });
 
         container.addEventListener("pointerenter", () =>
           bindInteractor(renderer, container)
@@ -251,8 +246,6 @@ const ManyRenderers = () => {
         container.addEventListener("pointerleave", () =>
           bindInteractor(null, null)
         );
-
-    
 
         // Keep track of renderer
         RENDERERS[container.id] = renderer;
@@ -276,15 +269,21 @@ const ManyRenderers = () => {
       document.body.appendChild(checkbox);
       document.body.appendChild(label);
       document.body.appendChild(document.createElement("br"));
-	  // filter vtk files
-	 const filteredFiles= files.filter(file=>file.extension ==='.vtk');
+      // filter vtk files
+      const filteredFiles = files.filter((file) => file.extension === ".vtk");
 
-	  filteredFiles.forEach((file)=>{
-		addRenderer(file.url);
-	 })
+      filteredFiles.forEach((file) => {
+        const url = file.url;
+        const fileId = file._id;
 
+        const urlNew = url.replace(
+          `/uploads/${file.origName}`,
+          `/getFile/${fileId}`
+        );
+        addRenderer(urlNew);
+      });
 
-     // for (let i = 0; i < 2; i++) {
+      // for (let i = 0; i < 2; i++) {
       //  addRenderer(url);
       //}
       resize();
