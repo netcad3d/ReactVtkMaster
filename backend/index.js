@@ -26,11 +26,9 @@ mongoose.connection.on("connected", () => {
   console.log("MongoDB connected");
 });
 
-mongoose.connection.on("error", () => {
+mongoose.connection.on("error", (err) => {
   console.error("Error connecting to mongo", err);
 });
-
-//! Routes
 
 app.listen(3000, () => {
   console.log("Server running on port 3000");
