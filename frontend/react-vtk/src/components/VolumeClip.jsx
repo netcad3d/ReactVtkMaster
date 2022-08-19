@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import style from "../Styling/volumeViewer.module.css";
 
 import "@kitware/vtk.js/favicon";

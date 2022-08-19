@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import axios from "axios";
 
 import "@kitware/vtk.js/Rendering/Profiles/Geometry";
 

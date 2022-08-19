@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -11,15 +10,10 @@ import SphereClip from "./components/SphereClip";
 import VolumeClip from "./components/VolumeClip";
 import VolumeViewer from "./components/VolumeViewer";
 import GeometryViewer from "./components/GeometryViewer";
-import Three from "./components/Three";
 import Auth from "./components/Auth";
 import ManyRenderers from "./components/ManyRenderers";
 
 function App() {
-  const [realUrl, setRealUrl] = useState("");
-  const handlePassUrl = (url) => {
-    setRealUrl(url);
-  };
   return (
     <>
       <Navbar />
@@ -35,7 +29,6 @@ function App() {
           path="/ManyRenderers"
           element={<ManyRenderers></ManyRenderers>}
         ></Route>
-        <Route path="/Three" element={<Three />} />
         <Route
           path="/signup"
           element={

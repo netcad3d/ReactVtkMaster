@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 import "@kitware/vtk.js/favicon";

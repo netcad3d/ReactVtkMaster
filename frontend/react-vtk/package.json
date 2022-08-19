@@ -18,8 +18,7 @@
     "react-router-dom": "^6.3.0",
     "react-toastify": "^9.0.8",
     "react-tooltip": "^4.2.21",
-    "sweetalert2": "^11.4.28",
-    "three": "^0.143.0"
+    "sweetalert2": "^11.4.28"
   },
   "devDependencies": {
     "@types/react": "^18.0.15",
