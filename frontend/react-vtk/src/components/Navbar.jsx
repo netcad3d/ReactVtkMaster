@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import { NavLink } from "react-router-dom";
 import { Cross as Hamburger } from "hamburger-react";
+import { logoutUser } from "../slices/authSlice";
+
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const auth = useSelector((state) => state.auth);
 
   return (
     <>
@@ -58,36 +64,65 @@ const Navbar = () => {
                 </div>
               </NavLink>
             </li>
-            <li className="flex mr-5 md:mt-2 mt-10 text-white">
-              <NavLink
-                className="text-sm flex items-center gap-x-4
-                    cursor-pointer "
-                to="/login"
-                style={{ color: "inherit", backgroundColor: "inherit" }}
+
+            {auth._id ? (
+              <li
+                className="flex mr-5 md:mt-2 mt-10 text-white cursor-pointer"
+                onClick={() => {
+                  dispatch(logoutUser(null));
+                  toast.info("Çıkış Yapıldı!", {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                  });
+                }}
               >
                 <div
                   className={`flex md:ml-8 ml-0 md:block 
                   duration-500 text-lg hover:text-[#d5d4d4]`}
                 >
-                  Giriş Yap
+                  Çıkış Yap
                 </div>
-              </NavLink>
-            </li>
-            <li className="flex mr-5 md:mt-2 mt-10 text-white">
-              <NavLink
-                className="text-sm flex items-center gap-x-4
+              </li>
+            ) : (
+              <>
+                <li className="flex mr-5 md:mt-2 mt-10 text-white">
+                  <NavLink
+                    className="text-sm flex items-center gap-x-4
+                      cursor-pointer "
+                    to="/signup"
+                    style={{ color: "inherit", backgroundColor: "inherit" }}
+                  >
+                    <div
+                      className={`flex md:ml-8 ml-0 md:block
+                    duration-500 text-lg hover:text-[#d5d4d4]`}
+                    >
+                      Kaydol
+                    </div>
+                  </NavLink>
+                </li>
+                <li className="flex mr-5 md:mt-2 mt-10 text-white">
+                  <NavLink
+                    className="text-sm flex items-center gap-x-4
                     cursor-pointer "
-                to="/signup"
-                style={{ color: "inherit", backgroundColor: "inherit" }}
-              >
-                <div
-                  className={`flex md:ml-8 ml-0 md:block 
+                    to="/login"
+                    style={{ color: "inherit", backgroundColor: "inherit" }}
+                  >
+                    <div
+                      className={`flex md:ml-8 ml-0 md:block 
                   duration-500 text-lg hover:text-[#d5d4d4]`}
-                >
-                  Kaydol
-                </div>
-              </NavLink>
-            </li>
+                    >
+                      Giriş Yap
+                    </div>
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

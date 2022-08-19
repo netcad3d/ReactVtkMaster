@@ -10,7 +10,8 @@ import SphereClip from "./components/SphereClip";
 import VolumeClip from "./components/VolumeClip";
 import VolumeViewer from "./components/VolumeViewer";
 import GeometryViewer from "./components/GeometryViewer";
-import Auth from "./components/Auth";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
 import ManyRenderers from "./components/ManyRenderers";
 
 function App() {
@@ -29,30 +30,8 @@ function App() {
           path="/ManyRenderers"
           element={<ManyRenderers></ManyRenderers>}
         ></Route>
-        <Route
-          path="/signup"
-          element={
-            <Auth
-              title="Hesap Oluştur"
-              button="Kaydol"
-              navigate="Hesabınız var mı?"
-              navigateTitle="Oturum Aç"
-              navigateLink="/login"
-            />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <Auth
-              title="Oturum Aç"
-              button="Giriş Yap"
-              navigate="Kullanıcı hesabınız yok mu?"
-              navigateTitle="Hesap Oluştur"
-              navigateLink="/signup"
-            />
-          }
-        />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </>
   );

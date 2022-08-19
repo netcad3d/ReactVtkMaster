@@ -1,9 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-const Auth = ({ title, button, navigate, navigateTitle, navigateLink }) => {
-  const navigation = useNavigate();
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../slices/authSlice";
+
+import Swal from "sweetalert2";
+
+const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  useEffect(() => {
+    if (auth._id) {
+      navigate("/");
+    }
+  }, [auth._id, navigate]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(loginUser(user));
+  };
+  useEffect(() => {
+    if (auth.loginStatus === "rejected") {
+      Swal.fire({
+        title: `${auth.loginError}`,
+        icon: "error",
+      });
+    }
+  }, [auth.loginStatus]);
 
   return (
     <div className="flex flex-col h-[100vh] justify-center items-center">
@@ -12,49 +44,44 @@ const Auth = ({ title, button, navigate, navigateTitle, navigateLink }) => {
           className="text-white font-bold text-2xl mt-5 text-center"
           style={{ fontFamily: '"Exo-2", sans-serif' }}
         >
-          {title}
+          Giriş Yap
         </h1>
+
         <div className="shadow-lg p-8 text-secondary md:w-[500px]">
-          <form action="" className="flex flex-col space-y-4">
-            {title === "Hesap Oluştur" ? (
-              <div>
-                <label for="" className="text-sm ">
-                  Kullanıcı Adı
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Kullanıcı Adı"
-                  className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:ring-secondary"
-                />
-              </div>
-            ) : null}
+          <form
+            action=""
+            className="flex flex-col space-y-4"
+            onSubmit={handleSubmit}
+          >
             <div>
-              <label for="" className="text-sm ">
+              <label htmlFor="email" className="text-sm ">
                 Email
               </label>
               <input
-                type="text"
+                id="email"
+                type="email"
                 required
                 placeholder="Email"
                 className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:ring-secondary"
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
               />
             </div>
-
             <div>
-              <label for="" className="text-sm">
+              <label htmlFor="password" className="text-sm">
                 Şifre
               </label>
               <input
-                type="text"
+                id="password"
+                type="password"
                 required
                 placeholder="Şifre"
                 className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:ring-secondary"
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
               />
             </div>
             <div className="flex justify-end">
               <button className="btn-secondary text-sm w-full ss:w-[200px] md:text-base p-2">
-                {button}
+                {auth.loginStatus === "pending" ? "Gönderiliyor" : "Giriş Yap"}
               </button>
             </div>
             <div
@@ -62,12 +89,12 @@ const Auth = ({ title, button, navigate, navigateTitle, navigateLink }) => {
               style={{ fontFamily: '"Exo-2", sans-serif' }}
             >
               <p className="text-sm text-white">
-                {navigate}{" "}
+                Hesabınız yok mu?
                 <span
-                  onClick={() => navigation(`${navigateLink}`)}
+                  onClick={() => navigate(`/signup`)}
                   className="cursor-pointer text-secondary hover:text-secondaryDark transition-all duration-100"
                 >
-                  {navigateTitle}
+                  Hesap Oluştur
                 </span>
               </p>
             </div>
@@ -78,4 +105,4 @@ const Auth = ({ title, button, navigate, navigateTitle, navigateLink }) => {
   );
 };
 
-export default Auth;
+export default Login;
