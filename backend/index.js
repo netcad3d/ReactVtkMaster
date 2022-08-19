@@ -7,7 +7,9 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const FileOperationsRoute = require("./routes/FileOperationsRoute");
+
 const AuthOperationsRoute = require("./routes/AuthOperationsRoute");
+const SinginRoute = require("./routes/SinginRoute");
 
 const app = express();
 
@@ -15,7 +17,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use(FileOperationsRoute);
-// app.use(AuthOperationsRoute);
+
+app.use("/api/signup", AuthOperationsRoute);
+app.use("/api/signin", SinginRoute);
 
 //! DB Connection
 const mongoUri = process.env.MONGO_URI;
