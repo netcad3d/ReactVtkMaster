@@ -24,9 +24,31 @@ import {
   ScalarMode,
 } from "@kitware/vtk.js/Rendering/Core/Mapper/Constants";
 
+import lottie from "lottie-web";
+import loadingCube from "../assets/loadingCube.json";
+
 const GeometryViewer = () => {
   const vtkContainerRef = useRef(null);
   const context = useRef(null);
+  const loaderRef = useRef(null);
+
+  useEffect(() => {
+    lottie.loadAnimation({
+      name: "loadingCube",
+      container: loaderRef.current,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: loadingCube,
+      rendererSettings: {
+        preserveAspectRatio: "xMidYMid slice",
+      },
+    });
+
+    return () => {
+      lottie.destroy();
+    };
+  }, []);
 
   let autoInit = true;
   let background = [0, 0, 0];
@@ -559,7 +581,13 @@ const GeometryViewer = () => {
   }, [vtkContainerRef]);
 
   return (
-    <div>
+    <div className="h-[100vh] flex">
+      <div className="w-full h-full bg-black z-[1] justify-center relative">
+        <div
+          ref={loaderRef}
+          className="w-[600px] h-[600px] absolute top-[60px]"
+        />
+      </div>
       <div ref={vtkContainerRef} />
     </div>
   );

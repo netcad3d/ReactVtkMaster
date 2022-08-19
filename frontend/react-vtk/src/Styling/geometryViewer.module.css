@@ -36,14 +36,18 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-20%, -50%);
   background-color: white;
   background-image: url(https://kitware.github.io/vtk-js/examples/GeometryViewer/3fdac36cbee8ffdf80fa.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   border-radius: 10px;
-  width: 70%;
-  height: 70%;
+  width: 50%;
+  height: 50%;
+  z-index: 1;
   cursor: pointer;
+  -webkit-box-shadow: 0px -5px 78px 7px rgba(0, 188, 239, 1);
+  -moz-box-shadow: 0px -5px 78px 7px rgba(0, 188, 239, 1);
+  box-shadow: 0px -5px 78px 7px rgba(0, 188, 239, 1);
 }

@@ -27,10 +27,32 @@ import vtkMatrixBuilder from "@kitware/vtk.js/Common/Core/MatrixBuilder";
 import "@kitware/vtk.js/IO/Core/DataAccessHelper/HtmlDataAccessHelper";
 import "@kitware/vtk.js/IO/Core/DataAccessHelper/JSZipDataAccessHelper";
 
+import lottie from "lottie-web";
+import loadingCube from "../assets/loadingCube.json";
+
 //import style from './VolumeViewer.module.css';
 const VolumeClip = () => {
   const vtkContainerRef = useRef(null);
   const context = useRef(null);
+  const loaderRef = useRef(null);
+
+  useEffect(() => {
+    lottie.loadAnimation({
+      name: "loadingCube",
+      container: loaderRef.current,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: loadingCube,
+      rendererSettings: {
+        preserveAspectRatio: "xMidYMid slice",
+      },
+    });
+
+    return () => {
+      lottie.destroy();
+    };
+  }, []);
 
   let autoInit = true;
   const userParams = vtkURLExtract.extractURLParameters();
@@ -465,8 +487,13 @@ const VolumeClip = () => {
   }, [vtkContainerRef]);
 
   return (
-    <div className="h-[100vh] flex flex-col">
-      <div className="w-full h-full bg-black z-[1]"></div>
+    <div className="h-[100vh] flex">
+      <div className="w-full h-full bg-black z-[1] justify-center relative">
+        <div
+          ref={loaderRef}
+          className="w-[600px] h-[600px] absolute top-[60px]"
+        />
+      </div>
       <div ref={vtkContainerRef} />
     </div>
   );
