@@ -52,7 +52,7 @@ const Navbar = () => {
               >
                 <div
                   className={`flex md:ml-8 ml-0 md:block 
-                  duration-500 text-lg`}
+                  duration-500 text-lg hover:text-[#d5d4d4]`}
                 >
                   Anasayfa
                 </div>
@@ -67,7 +67,7 @@ const Navbar = () => {
               >
                 <div
                   className={`flex md:ml-8 ml-0 md:block 
-                  duration-500 text-lg`}
+                  duration-500 text-lg hover:text-[#d5d4d4]`}
                 >
                   Giriş Yap
                 </div>
@@ -82,7 +82,7 @@ const Navbar = () => {
               >
                 <div
                   className={`flex md:ml-8 ml-0 md:block 
-                  duration-500 text-lg`}
+                  duration-500 text-lg hover:text-[#d5d4d4]`}
                 >
                   Kaydol
                 </div>

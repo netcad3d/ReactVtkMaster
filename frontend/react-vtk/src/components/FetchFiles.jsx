@@ -122,17 +122,17 @@ const FetchFiles = () => {
       });
     } else {
       Swal.fire({
-        title: "Emin misin gardaş?",
-        text: "Bakhele!! Bu işlem geri döndürülemez ve tüm dosyalar silinecektir!",
+        title: "Emin misin?",
+        text: "Bu işlem geri döndürülemez ve tüm dosyalar silinecektir!",
         icon: "warning",
         showCancelButton: true,
-        cancelButtonText: "Yoo Silme!",
+        cancelButtonText: "Vazgeç",
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Evet, sil gardaş!",
+        confirmButtonText: "Evet, sil!",
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire("Başarıyla silindi!", "Silindi Babuş", "success");
+          Swal.fire("Başarıyla silindi!", "", "success");
           axios
             .delete(`http://localhost:3000/deleteAllFiles`)
             .then((res) => {
@@ -147,7 +147,7 @@ const FetchFiles = () => {
                     progress: undefined,
                     theme: "dark",
                   })
-                : toast.error("Silerken hata oluştu babuş.", {
+                : toast.error("Silerken hata oluştu.", {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: false,
