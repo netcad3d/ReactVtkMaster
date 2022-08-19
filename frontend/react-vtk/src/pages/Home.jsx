@@ -31,7 +31,7 @@ const Home = () => {
                 className="text-2xl text-white font-semibold tracking-wide text-center mt-3"
                 style={{ fontFamily: '"Exo-2", sans-serif' }}
               >
-                Yüklenenen Dosyalar
+                Yüklenenen Dosya
               </h1>
             </div>
             <div className="flex flex-col mt-3 justify-center items-center">
@@ -41,7 +41,7 @@ const Home = () => {
         </div>
       </div>
       <div className=" border-t-2 border-secondary w-[90%]">
-        <h1 className="text-2xl text-white font-semibold tracking-wide text-center mt-3">
+        <h1 className="text-2xl text-white font-semibold tracking-wide text-center mt-3 mb-5">
           Serverdaki Dosyalar
         </h1>
         <FetchFiles />

@@ -83,12 +83,10 @@ const FetchFiles = () => {
             console.log(err);
           });
 
-		  setTimeout(() => {
-			fetchButton(e);
-		  }, 0);
+        setTimeout(() => {
+          fetchButton(e);
+        }, 0);
       }
-
-     
     });
   };
 
@@ -175,15 +173,15 @@ const FetchFiles = () => {
 
   return (
     <>
-      <div className="flex items-center">
+      <div className="flex items-center flex-col md:flex-row mb-10 ">
         <button
-          className="btn-primary text-lg md:w-[200px] mt-3 w-full mr-3"
+          className="btn-primary text-lg md:w-[200px] mt-3 w-full md:mr-3"
           onClick={(e) => viewAllAVtkFiles(e, files)}
         >
           Tümünü Görüntüle
         </button>
         <button
-          className="btn-primary md:w-[200px] mt-3 w-full mr-3"
+          className="btn-primary md:w-[200px] mt-3 w-full md:mr-3"
           onClick={fetchButton}
         >
           Dosyaları Getir
