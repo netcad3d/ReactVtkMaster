@@ -581,14 +581,14 @@ const GeometryViewer = () => {
   }, [vtkContainerRef]);
 
   return (
-    <div className="h-[100vh] flex">
+    <div className="h-[100vh] flex flex-col">
       <div className="w-full h-full bg-black z-[1] justify-center relative">
         <div
           ref={loaderRef}
           className="w-[600px] h-[600px] absolute top-[60px]"
         />
       </div>
-      <div ref={vtkContainerRef} />
+      <div ref={vtkContainerRef} style={{ display: "none" }} />
     </div>
   );
 };
