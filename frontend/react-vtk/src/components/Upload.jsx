@@ -69,7 +69,7 @@ const Upload = ({ onSuccess }) => {
   };
 
   return (
-    <div className="flex flex-col w-full md:w-[500px] items-center justify-center mb-3 md:mb-0">
+    <div className="flex flex-col w-full md:w-[500px] items-center justify-center mb-3 md:mb-0 mt-[100px] md:mt-0">
       <ToastContainer
         position="top-right"
         autoClose={5000}
