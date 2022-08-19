@@ -174,20 +174,23 @@ const FetchFiles = () => {
     <>
       <div className="flex items-center flex-col md:flex-row mb-10 ">
         <button
-          className="btn-primary text-lg md:w-[200px] mt-3 w-full md:mr-3"
+          className="btn-primary md:w-[220px] mt-3 w-full md:mr-3"
           onClick={(e) => viewAllAVtkFiles(e, files)}
+          style={{ fontFamily: '"Exo-2", sans-serif' }}
         >
           Tümünü Görüntüle
         </button>
         <button
           className="btn-primary md:w-[200px] mt-3 w-full md:mr-3"
           onClick={fetchButton}
+          style={{ fontFamily: '"Exo-2", sans-serif' }}
         >
           Dosyaları Getir
         </button>
         <button
-          className="btn-primary md:w-[200px] mt-3 w-full"
+          className="btn-primary md:w-[220px] mt-3 w-full"
           onClick={() => deleteAll(files)}
+          style={{ fontFamily: '"Exo-2", sans-serif' }}
         >
           Tüm Dosyaları Sil
         </button>
