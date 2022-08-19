@@ -102,7 +102,7 @@ const Upload = ({ onSuccess }) => {
             className="btn-secondary w-full text-center"
             style={{ fontFamily: '"Exo-2", sans-serif' }}
             data-for="upload"
-            data-tip="Legacy Poly Data File"
+            data-tip="Legacy Poly Data Dosyalarını Görüntüleyin"
           >
             <ReactTooltip
               id="upload"
@@ -124,13 +124,33 @@ const Upload = ({ onSuccess }) => {
       <button
         className="btn-primary w-[90%] mt-4"
         onClick={() => navigate("/VolumeClip")}
+        data-for="uploadVTI"
+        data-tip="VTI Dosyalarını Clip Fonksiyonu ile Görüntüleyin"
       >
+        <ReactTooltip
+          id="uploadVTI"
+          effect="solid"
+          backgroundColor="#13285d"
+          borderColor="#00BCEF"
+          border={true}
+          place="right"
+        />
         VTI Dosyası Görüntüle
       </button>
       <button
         className="btn-primary w-[90%] mt-4"
         onClick={() => navigate("/GeometryViewer")}
+        data-for="uploadVTP"
+        data-tip=".VTP ve .Web3D Dosyalarını Görüntüleyin"
       >
+        <ReactTooltip
+          id="uploadVTP"
+          effect="solid"
+          backgroundColor="#13285d"
+          borderColor="#00BCEF"
+          border={true}
+          place="bottom"
+        />
         VTP Dosyası Görüntüle
       </button>
     </div>
