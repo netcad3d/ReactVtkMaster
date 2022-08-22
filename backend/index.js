@@ -1,4 +1,5 @@
 require("./models/File");
+require("./models/User");
 
 const express = require("express");
 require("dotenv").config();
@@ -10,7 +11,7 @@ const FileOperationsRoute = require("./routes/FileOperationsRoute");
 
 const AuthOperationsRoute = require("./routes/AuthOperationsRoute");
 const SinginRoute = require("./routes/SinginRoute");
-const requireAuth = require("./middlewares/requireAuth");
+// const requireAuth = require("./middlewares/requireAuth");
 
 const app = express();
 
@@ -38,9 +39,9 @@ mongoose.connection.on("error", (err) => {
   console.error("Error connecting to mongo", err);
 });
 
-app.get("/", requireAuth, (req, res) => {
-  res.send(`Welcome ${req.user.username}`);
-});
+// app.get("/", requireAuth, (req, res) => {
+//   res.send(`Welcome ${req.user.username}`);
+// });
 
 app.listen(3000, () => {
   console.log("Server running on port 3000");

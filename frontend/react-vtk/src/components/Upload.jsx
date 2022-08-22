@@ -15,8 +15,7 @@ const Upload = ({ onSuccess }) => {
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
 
-  const _id = auth._id;
-  console.log(_id);
+  const { token } = auth;
 
   const onInputChange = (e) => {
     setFiles(e.target.files);
@@ -26,7 +25,7 @@ const Upload = ({ onSuccess }) => {
     e.preventDefault();
 
     const data = new FormData();
-    const config = { headers: { "Content-Type": "multipart/form-data" } };
+    const config = { headers: { Authorization: `Bearer ${token}` } };
 
     for (let i = 0; i < files.length; i++) {
       data.append("file", files[i]);
