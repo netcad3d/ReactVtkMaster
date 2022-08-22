@@ -488,7 +488,7 @@ const VolumeClip = () => {
 
   return (
     <div className="h-[100vh] flex">
-      <div className="w-full h-full bg-black z-[1] justify-center items-center relative">
+      <div className="flex w-full h-full bg-black z-[1] justify-center items-center relative">
         <div
           ref={loaderRef}
           className="md:w-[600px] md:h-[600px] absolute md:left-0 hidden md:block"
