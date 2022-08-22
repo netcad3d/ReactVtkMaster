@@ -488,10 +488,10 @@ const VolumeClip = () => {
 
   return (
     <div className="h-[100vh] flex">
-      <div className="w-full h-full bg-black z-[1] justify-center relative">
+      <div className="w-full h-full bg-black z-[1] justify-center items-center relative">
         <div
           ref={loaderRef}
-          className="w-[600px] h-[600px] absolute top-[60px]"
+          className="w-[600px] h-[600px] absolute left-0 top-[20%]"
         />
       </div>
       <div ref={vtkContainerRef} />
