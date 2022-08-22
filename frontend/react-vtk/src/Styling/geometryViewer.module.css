@@ -38,7 +38,7 @@
   top: 50%;
   transform: translate(-20%, -50%);
   background-color: white;
-  background-image: url(https://kitware.github.io/vtk-js/examples/GeometryViewer/3fdac36cbee8ffdf80fa.jpg);
+  background-image: url("/vtp.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;

@@ -4,11 +4,8 @@ const path = require("path");
 const fs = require("fs");
 const requireAuth = require("../middlewares/requireAuth");
 
-const router = express.Router();
-
-// router.use(requireAuth);
-
 const File = require("../models/File");
+const router = express.Router();
 
 //! Multer Config
 const storage = multer.diskStorage({
@@ -22,7 +19,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage }).array("file");
 
-router.post("/uploads", upload, (req, res) => {
+router.post("/uploads", [upload, requireAuth], (req, res) => {
   const files = req.files;
 
   files.forEach((file) => {
@@ -48,12 +45,12 @@ router.post("/uploads", upload, (req, res) => {
   });
 });
 
-router.get("/fetchFiles", async (req, res) => {
+router.get("/fetchFiles", requireAuth, async (req, res) => {
   const files = await File.find();
   res.json(files);
 });
 
-router.delete("/deleteFile/:id", async (req, res) => {
+router.delete("/deleteFile/:id", requireAuth, async (req, res) => {
   const id = req.params.id;
 
   const file = await File.findById(id);
@@ -75,7 +72,7 @@ router.delete("/deleteFile/:id", async (req, res) => {
   }
 });
 
-router.delete("/deleteAllFiles", async (req, res) => {
+router.delete("/deleteAllFiles", requireAuth, async (req, res) => {
   await File.deleteMany();
 
   fs.readdir(path.join(__dirname, "../uploads"), (err, files) => {
@@ -91,7 +88,7 @@ router.delete("/deleteAllFiles", async (req, res) => {
   res.json({ message: "All files deleted" });
 });
 
-router.get("/getFile/:id", async (req, res) => {
+router.get("/getFile/:id", requireAuth, async (req, res) => {
   const id = req.params.id;
 
   const file = await File.findById(id);

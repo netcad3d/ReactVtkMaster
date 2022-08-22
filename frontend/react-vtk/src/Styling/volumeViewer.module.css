@@ -4,7 +4,7 @@
   top: 50%;
   transform: translate(-20%, -50%);
   background-color: white;
-  background-image: url(https://kitware.github.io/vtk-js/examples/VolumeViewer/d12fb5393ccf95ded195.jpg);
+  background-image: url("/vti.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;

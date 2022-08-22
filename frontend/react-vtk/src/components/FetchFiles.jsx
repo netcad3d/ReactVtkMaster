@@ -14,14 +14,13 @@ const FetchFiles = () => {
   const navigate = useNavigate();
 
   const auth = useSelector((state) => state.auth);
+  const { token } = auth;
 
-  console.log(auth);
-  const _id = auth._id;
-  console.log(_id);
+  const config = { headers: { Authorization: `Bearer ${token}` } };
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/fetchFiles")
+      .get("http://localhost:3000/fetchFiles", config)
       .then((res) => {
         setFiles(res.data);
       })
@@ -34,7 +33,7 @@ const FetchFiles = () => {
     e.preventDefault();
 
     axios
-      .get("http://localhost:3000/fetchFiles")
+      .get("http://localhost:3000/fetchFiles", config)
       .then((res) => {
         setFiles(res.data);
       })
@@ -60,7 +59,7 @@ const FetchFiles = () => {
         Swal.fire("Başarıyla silindi!", "Silindi Babuş", "success");
 
         axios
-          .delete(`http://localhost:3000/deleteFile/${_id}`)
+          .delete(`http://localhost:3000/deleteFile/${_id}`, config)
           .then((res) => {
             res.status === 200
               ? toast.success("Başarıyla silindi.", {
@@ -141,7 +140,7 @@ const FetchFiles = () => {
         if (result.isConfirmed) {
           Swal.fire("Başarıyla silindi!", "", "success");
           axios
-            .delete(`http://localhost:3000/deleteAllFiles`)
+            .delete(`http://localhost:3000/deleteAllFiles`, config)
             .then((res) => {
               res.status === 200
                 ? toast.success("Başarıyla silindi.", {
