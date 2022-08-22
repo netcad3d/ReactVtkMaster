@@ -66,7 +66,7 @@ const authSlice = createSlice({
         return {
           ...state,
           token,
-          name: user.name,
+          username: user.username,
           email: user.email,
           _id: user._id,
           userLoaded: true,

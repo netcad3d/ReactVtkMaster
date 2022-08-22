@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import ReactTooltip from "react-tooltip";
+import { useSelector } from "react-redux";
 
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -12,6 +13,10 @@ import Swal from "sweetalert2";
 const Upload = ({ onSuccess }) => {
   const [files, setFiles] = useState([]);
   const navigate = useNavigate();
+  const auth = useSelector((state) => state.auth);
+
+  const _id = auth._id;
+  console.log(_id);
 
   const onInputChange = (e) => {
     setFiles(e.target.files);

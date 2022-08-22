@@ -5,12 +5,19 @@ import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Swal from "sweetalert2";
 
 const FetchFiles = () => {
   const [files, setFiles] = useState([]);
   const navigate = useNavigate();
+
+  const auth = useSelector((state) => state.auth);
+
+  console.log(auth);
+  const _id = auth._id;
+  console.log(_id);
 
   useEffect(() => {
     axios
