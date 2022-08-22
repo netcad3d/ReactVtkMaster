@@ -4,7 +4,11 @@ const express = require("express");
 
 const { User } = require("../models/User");
 const generateAuthToken = require("../utils/genAuthToken");
-
+//mail imports
+const{Token}=require("../models/token");
+const sendEmail=require("../utils/sendEmail");
+const crypto=require("crypto");
+//
 const router = express.Router();
 
 router.post("/", async (req, res) => {
@@ -33,6 +37,7 @@ router.post("/", async (req, res) => {
 
   if (!user) return res.status(400).send("Yanlış email veya şifre");
 
+
   const isValidPassword = await bcrypt.compare(
     req.body.password,
     user.password
@@ -40,9 +45,26 @@ router.post("/", async (req, res) => {
 
   if (!isValidPassword) return res.status(400).send("Yanlış email veya şifre");
 
+//logged in successfully
+	let tokenVrf=await new Token.findOne({userId:user._id});
+	if(!tokenVrf){
+		tokenVrf=await new Token({
+			userId:user._id,
+			token:crypto.randomBytes(32).toString("hex"),
+		}).save();
+
+		const url=`${process.env.BASE_URL}users/${user_id}/verify/${tokenVrf.token}`;
+		// send verify email
+		await sendEmail(user.email,"Verify Email",url);
+
+	}
+	res.status(400).write({message:"An Email sent to your account ,please verify your email first: "});
+
+
   const token = generateAuthToken(user);
 
-  res.send(token);
+  res.write(token);
+  res.end();
 });
 
 module.exports = router;

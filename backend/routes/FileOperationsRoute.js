@@ -4,8 +4,17 @@ const path = require("path");
 const fs = require("fs");
 const requireAuth = require("../middlewares/requireAuth");
 
+//mail imports
+const {Token}=require("../models/token");
+const sendEmail=require("../utils/sendEmail");
+const crypto=require("crypto");
+//
+
 const File = require("../models/File");
+const { TokenExpiredError } = require("jsonwebtoken");
+const { User } = require("../models/User");
 const router = express.Router();
+
 
 //! Multer Config
 const storage = multer.diskStorage({
@@ -103,5 +112,30 @@ router.get("/getFile/:id", requireAuth, async (req, res) => {
     res.json({ message: "File not found" });
   }
 });
+
+router.get("/:id/verify/:token", async (req, res) => {
+	try{
+		const user= await User.findOne({_id:req.params.id});
+		if(!user) return res.status(400).send({message:"Invalid Link"});
+
+		const token= await Token.findOne({
+			userId:user._id,
+			_id:req.params.token});
+
+		if(!token) return res.status(400).send({message:"Invalid Link"});
+
+		await User.updateOne({_id:user._id},{verified:true});
+		await token.remove();
+
+		res.status(200).send({message:"Account Verified"})
+
+	}
+	catch(err){
+		
+		console.log(err);
+		res.status(500).send({message:"Internal Server Error"});
+	}
+
+})
 
 module.exports = router;

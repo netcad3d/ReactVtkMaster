@@ -5,6 +5,12 @@ const express = require("express");
 const { User } = require("../models/User");
 const generateAuthToken = require("../utils/genAuthToken");
 
+//mail imports
+const Token=require("../models/token");
+const sendEmail=require("../utils/sendEmail");
+const crypto=require("crypto");
+//
+
 const router = express.Router();
 
 router.post("/", async (req, res) => {
@@ -31,8 +37,20 @@ router.post("/", async (req, res) => {
   user.password = await bcrypt.hash(user.password, salt);
 
   user = await user.save();
+  //email verify token
+  const tokenVrf = await new Token({
+	userId:user._id,
+	token:crypto.randomBytes(32).toString("hex"),
+  }).save();
+
+const url=`${process.env.BASE_URL}users/${user_id}/verify/${tokenVrf.token}`;
+// send verify email
+await sendEmail(user.email,"Verify Email",url);
+
+
 
   const token = generateAuthToken(user);
+  // res.status(201).send({ EMail sent to your account ,please verify your email first:  });
 
   res.send(token);
 });

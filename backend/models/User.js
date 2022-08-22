@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+
+
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -21,6 +23,10 @@ const UserSchema = new mongoose.Schema({
     minlength: 6,
     maxlength: 1024,
   },
+  verified: {
+	type: Boolean,
+	default: false,
+  }
 });
 
 const User = mongoose.model("User", UserSchema);

@@ -3,13 +3,17 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
+import styles from "../Styling/verify.module.css";
 import { registerUser } from "../slices/authSlice";
 
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Signup = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
+  const [msg,setMsg] = useState("");
+  const [error,setError] = useState("");
 
   const [user, setUser] = useState({
     username: "",
@@ -29,7 +33,9 @@ const Signup = () => {
 
   useEffect(() => {
     if (auth._id) {
-      navigate("/");
+      navigate("/signup");
+	  setMsg("kayıt başarılı");
+
     }
   }, [auth._id, navigate]);
 
@@ -39,6 +45,7 @@ const Signup = () => {
         title: `${auth.registerError}`,
         icon: "error",
       });
+	  setError(`${auth.registerError}`);
     }
   }, [auth.registerStatus]);
 
@@ -99,6 +106,12 @@ const Signup = () => {
                 {auth.registerStatus === "pending" ? "Gönderliyor" : "Kaydol"}
               </button>
             </div>
+			<div className="flex justify-center">
+				{msg&& <div className={styles.succes_msg}>{msg}</div>}
+			</div>
+			<div className="flex justify-center">
+				{error&& <div className={styles.error_msg}>{error}</div>}
+			</div>
             <div
               className="flex justify-center items-center"
               style={{ fontFamily: '"Exo-2", sans-serif' }}
