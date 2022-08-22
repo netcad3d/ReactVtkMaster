@@ -586,10 +586,17 @@ const GeometryViewer = () => {
         <div
           ref={loaderRef}
           className="md:w-[600px] md:h-[600px] absolute md:left-0 hidden md:block"
-          style={{ flex: 1 }}
+          onMouseEnter={() => {
+            lottie.setDirection(-1);
+            lottie.play("loadingCube");
+          }}
+          onMouseLeave={() => {
+            lottie.setDirection(1);
+            lottie.play("loadingCube");
+          }}
         />
       </div>
-      <div ref={vtkContainerRef} style={{ flex: 1 }} />
+      <div ref={vtkContainerRef} />
     </div>
   );
 };
