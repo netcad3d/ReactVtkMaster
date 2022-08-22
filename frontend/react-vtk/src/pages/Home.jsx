@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Upload from "../components/Upload";
 import Preview from "../components/Preview";
 import FetchFiles from "../components/FetchFiles";
+import LandingPage from "./LandingPage";
 
 const Home = () => {
   const [files, setFiles] = useState([]);
@@ -49,7 +50,9 @@ const Home = () => {
             <FetchFiles />
           </div>
         </div>
-      ) : null}
+      ) : (
+        <LandingPage />
+      )}
     </>
   );
 };
