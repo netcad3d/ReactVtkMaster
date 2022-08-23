@@ -29,12 +29,22 @@ import "@kitware/vtk.js/IO/Core/DataAccessHelper/JSZipDataAccessHelper";
 
 import lottie from "lottie-web";
 import loadingCube from "../assets/loadingCube.json";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 //import style from './VolumeViewer.module.css';
 const VolumeClip = () => {
   const vtkContainerRef = useRef(null);
   const context = useRef(null);
   const loaderRef = useRef(null);
+  const auth = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!auth._id) {
+      navigate("/");
+    }
+  }, []);
 
   useEffect(() => {
     lottie.loadAnimation({

@@ -88,7 +88,7 @@ router.delete("/deleteAllFiles", requireAuth, async (req, res) => {
   res.json({ message: "All files deleted" });
 });
 
-router.get("/getFile/:id", requireAuth, async (req, res) => {
+router.get("/getFile/:id", async (req, res) => {
   const id = req.params.id;
 
   const file = await File.findById(id);
