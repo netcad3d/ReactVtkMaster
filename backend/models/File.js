@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const FileSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "users",
   },
   origName: String,
   name: String,
