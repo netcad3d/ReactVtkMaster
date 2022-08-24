@@ -126,7 +126,7 @@ const authSlice = createSlice({
         return {
           ...state,
           token: action.payload,
-          name: user.name,
+          username: user.name,
           email: user.email,
           _id: user._id,
           loginStatus: "success",

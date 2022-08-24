@@ -35,9 +35,6 @@ const Signup = () => {
     if (auth._id) {
       //axios.get(`http://localhost:3000/api/users/${auth._id}`)
       navigate("/signup");
-      setMsg(
-        "An email sent to yout email address. Please verify your email to login"
-      );
     }
   }, [auth._id, navigate]);
 
@@ -46,8 +43,15 @@ const Signup = () => {
       Swal.fire({
         title: `${auth.registerError}`,
         icon: "error",
+        confirmButtonText: "Tamam",
       });
-      setError(`${auth.registerError}`);
+    }
+    if (auth.registerStatus === "success") {
+      Swal.fire({
+        title: `${auth.email} adresine onay maili gönderildik. Devam edebilmek için lütfen mailinize gelen linki onaylayın.`,
+        icon: "info",
+        confirmButtonText: "Tamam",
+      });
     }
   }, [auth.registerStatus]);
 
