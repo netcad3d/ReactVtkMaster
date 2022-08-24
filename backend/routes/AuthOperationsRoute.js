@@ -6,9 +6,9 @@ const { User } = require("../models/User");
 const generateAuthToken = require("../utils/genAuthToken");
 
 //mail imports
-const Token=require("../models/token");
-const sendEmail=require("../utils/sendEmail");
-const crypto=require("crypto");
+const Token = require("../models/token");
+const sendEmail = require("../utils/sendEmail");
+const crypto = require("crypto");
 //
 
 const router = express.Router();
@@ -37,27 +37,24 @@ router.post("/", async (req, res) => {
   user.password = await bcrypt.hash(user.password, salt);
 
   user = await user.save();
- 
- if(!user.verified){
-	let tokenVrf=await  Token.findOne({userId:user._id});
-	 //email verify token
-	if(!tokenVrf){
-	 const tokenVrf = await new Token({
-		userId:user._id,
-		token:crypto.randomBytes(12).toString("hex"),
-	  }).save();
-	
-	
-	const url=`${process.env.BASE_URL}${user._id}/verify/${tokenVrf.token}`;
-	// send verify email
-	await sendEmail(user.email,"Verify Email",url);
-	}
-	return res
-				.status(400)
-				.send({ message: "An Email sent to your account please verify" });
-	 }
 
-console.log(here);
+  if (!user.verified) {
+    let tokenVrf = await Token.findOne({ userId: user._id });
+    //email verify token
+    if (!tokenVrf) {
+      const tokenVrf = await new Token({
+        userId: user._id,
+        token: crypto.randomBytes(12).toString("hex"),
+      }).save();
+
+      const url = `${process.env.BASE_URL}${user._id}/verify/${tokenVrf.token}`;
+      // send verify email
+      await sendEmail(user.email, "Verify Email", url);
+    }
+    return res
+      .status(400)
+      .send({ message: "An Email sent to your account please verify" });
+  }
 
   const token = generateAuthToken(user);
   // res.status(201).send({ EMail sent to your account ,please verify your email first:  });

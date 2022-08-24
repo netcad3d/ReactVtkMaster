@@ -12,8 +12,8 @@ import axios from "axios";
 const Signup = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const [msg,setMsg] = useState("");
-  const [error,setError] = useState("");
+  const [msg, setMsg] = useState("");
+  const [error, setError] = useState("");
 
   const [user, setUser] = useState({
     username: "",
@@ -33,10 +33,11 @@ const Signup = () => {
 
   useEffect(() => {
     if (auth._id) {
-		//axios.get(`http://localhost:3000/api/users/${auth._id}`)
+      //axios.get(`http://localhost:3000/api/users/${auth._id}`)
       navigate("/signup");
-	  setMsg("An email sent to yout email address. Please verify your email to login");
-
+      setMsg(
+        "An email sent to yout email address. Please verify your email to login"
+      );
     }
   }, [auth._id, navigate]);
 
@@ -46,7 +47,7 @@ const Signup = () => {
         title: `${auth.registerError}`,
         icon: "error",
       });
-	  setError(`${auth.registerError}`);
+      setError(`${auth.registerError}`);
     }
   }, [auth.registerStatus]);
 
@@ -107,12 +108,6 @@ const Signup = () => {
                 {auth.registerStatus === "pending" ? "Gönderliyor" : "Kaydol"}
               </button>
             </div>
-			<div className="flex justify-center">
-				{msg&& <div className={styles.succes_msg}>{msg}</div>}
-			</div>
-			<div className="flex justify-center">
-				{error&& <div className={styles.error_msg}>{error}</div>}
-			</div>
             <div
               className="flex justify-center items-center"
               style={{ fontFamily: '"Exo-2", sans-serif' }}
