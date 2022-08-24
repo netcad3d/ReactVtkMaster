@@ -16,8 +16,8 @@ const LandingPage = () => {
             style={{ fontFamily: '"Exo-2", sans-serif' }}
           >
             <div className="flex p-4 text-center flex-col">
-              <h1 className="text-white text-4xl capitalize font-semibold">
-                VTK dosyalarını webde artık webde görüntelemek çok kolay !
+              <h1 className="text-white text-3xl md:text-4xl capitalize font-semibold">
+                VTK dosyalarını artık webde görüntelemek çok kolay !
               </h1>
               <div className="mt-3">
                 <p className="text-white text-lg">

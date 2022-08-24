@@ -24,6 +24,9 @@ import vtkInteractorStyleTrackballCamera from "@kitware/vtk.js/Interaction/Style
 // ----------------------------------------------------------------------------
 //
 
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 const ManyRenderers = () => {
   // /const {url}=props;
   const { state } = useLocation();
@@ -31,6 +34,14 @@ const ManyRenderers = () => {
 
   const vtkContainerRef = useRef(null);
   const context = useRef(null);
+  const auth = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!auth._id) {
+      navigate("/");
+    }
+  }, []);
 
   useEffect(() => {
     if (!context.current) {

@@ -61,7 +61,7 @@ const Login = () => {
                 id="email"
                 type="email"
                 placeholder="Email"
-                className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:ring-secondary"
+                className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:text-primary focus:ring-white focus:bg-secondary placeholder:text-primary "
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
               />
             </div>
@@ -73,7 +73,7 @@ const Login = () => {
                 id="password"
                 type="password"
                 placeholder="Şifre"
-                className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:ring-secondary"
+                className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:text-primary focus:ring-white focus:bg-secondary placeholder:text-primary"
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
               />
             </div>

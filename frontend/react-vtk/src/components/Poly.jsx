@@ -7,6 +7,8 @@ import vtkActor from "@kitware/vtk.js/Rendering/Core/Actor";
 import vtkFullScreenRenderWindow from "@kitware/vtk.js/Rendering/Misc/FullScreenRenderWindow";
 import vtkMapper from "@kitware/vtk.js/Rendering/Core/Mapper";
 import vtkPolyDataReader from "@kitware/vtk.js/IO/Legacy/PolyDataReader";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Poly = () => {
   const { state } = useLocation();
@@ -14,6 +16,14 @@ const Poly = () => {
 
   const foundFile = filesToSend.find((file) => file._id === _id);
   const url = foundFile.url;
+  const auth = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!auth._id) {
+      navigate("/");
+    }
+  }, []);
 
   const vtkContainerRef = useRef(null);
   const context = useRef(null);

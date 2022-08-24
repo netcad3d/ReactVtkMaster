@@ -32,6 +32,7 @@ const upload = multer({ storage }).array("file");
 
 router.post("/uploads", [upload, requireAuth], (req, res) => {
   const files = req.files;
+  const userId = req.user._id;
 
   files.forEach((file) => {
     //full name
@@ -48,6 +49,7 @@ router.post("/uploads", [upload, requireAuth], (req, res) => {
       extension,
       size,
       url,
+      userId,
     });
 
     newFile.save().then((file) => {
@@ -57,7 +59,9 @@ router.post("/uploads", [upload, requireAuth], (req, res) => {
 });
 
 router.get("/fetchFiles", requireAuth, async (req, res) => {
-  const files = await File.find();
+  const userId = req.user._id;
+  const files = await File.find({ userId });
+
   res.json(files);
 });
 
@@ -99,7 +103,7 @@ router.delete("/deleteAllFiles", requireAuth, async (req, res) => {
   res.json({ message: "All files deleted" });
 });
 
-router.get("/getFile/:id", requireAuth, async (req, res) => {
+router.get("/getFile/:id", async (req, res) => {
   const id = req.params.id;
 
   const file = await File.findById(id);
