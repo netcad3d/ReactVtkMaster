@@ -53,19 +53,19 @@ router.post("/", async (req, res) => {
 			token:crypto.randomBytes(12).toString("hex"),
 		}).save();
 
-		const url=`${process.env.BASE_URL}users/${user._id}/verify/${tokenVrf.token}`;
+		const url=`${process.env.BASE_URL}${user._id}/verify/${tokenVrf.token}`;
 		// send verify email
 		await sendEmail(user.email,"Verify Email",url);
 
 	}
 	console.log(user.verified);
 	if(!user.verified)
-	res.status(400).write("An Email sent to your account ,please verify your email first: ");
+	res.status(400).write("An Email sent to your account ,please verify your email first");
 
 
   const token = generateAuthToken(user);
 
-  res.write(token);
+  res.status(200).write(token);
   res.end();
 });
 

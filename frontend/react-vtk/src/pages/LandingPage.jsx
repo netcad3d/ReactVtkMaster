@@ -1,8 +1,23 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+
+import Swal from "sweetalert2";
 
 const LandingPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+	if (auth.registerStatus === "success" && !auth.verified) {
+		Swal.fire({
+		  title: `${auth.email} adresine onay maili gönderildik. Devam edebilmek için lütfen mailinize gelen linki onaylayın.`,
+		  icon: "info",
+		  confirmButtonText: "Tamam",
+		});
+	  }
+  },[auth.registerStatus])
 
   return (
     <div className="flex flex-col justify-center items-center bg-primary h-[100vh]">
