@@ -13,7 +13,10 @@ import GeometryViewer from "./components/GeometryViewer";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import ManyRenderers from "./components/ManyRenderers";
+
+import EmailVerifyPage from "./pages/EmailVerifyPage";
 import EmailVerify from "./components/EmailVerify";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -33,7 +36,8 @@ function App() {
         ></Route>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-		<Route path="/:id/verify/:token" element={<EmailVerify />} />
+        <Route path="/:id/verify/:token" element={<EmailVerifyPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

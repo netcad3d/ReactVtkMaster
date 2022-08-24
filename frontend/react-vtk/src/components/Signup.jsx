@@ -33,8 +33,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (auth._id) {
-      //axios.get(`http://localhost:3000/api/users/${auth._id}`)
-      navigate("/signup");
+      navigate("/login");
     }
   }, [auth._id, navigate]);
 
