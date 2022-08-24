@@ -61,10 +61,8 @@ const authSlice = createSlice({
   reducers: {
     loadUser(state, action) {
       const token = state.token;
-
       if (token) {
         const user = jwtDecode(token);
-        console.log(user);
         return {
           ...state,
           token,
@@ -125,7 +123,6 @@ const authSlice = createSlice({
     builder.addCase(loginUser.fulfilled, (state, action) => {
       if (action.payload) {
         const user = jwtDecode(action.payload);
-        console.log(user);
         return {
           ...state,
           token: action.payload,
