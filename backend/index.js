@@ -12,6 +12,7 @@ const FileOperationsRoute = require("./routes/FileOperationsRoute");
 const AuthOperationsRoute = require("./routes/AuthOperationsRoute");
 const SinginRoute = require("./routes/SinginRoute");
 // const requireAuth = require("./middlewares/requireAuth");
+const checkUsers=require("./utils/cleanInactive");
 
 const app = express();
 
@@ -38,6 +39,10 @@ mongoose.connection.on("connected", () => {
 mongoose.connection.on("error", (err) => {
   console.error("Error connecting to mongo", err);
 });
+
+// cleaning inactivity  accounts after 48 hours inactivity
+	checkUsers();
+
 
 // app.get("/", requireAuth, (req, res) => {
 //   res.send(`Welcome ${req.user.username}`);
