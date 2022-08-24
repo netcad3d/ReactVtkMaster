@@ -51,9 +51,6 @@ router.post("/", async (req, res) => {
       // send verify email
       await sendEmail(user.email, "Verify Email", url);
     }
-    return res
-      .status(400)
-      .send({ message: "An Email sent to your account please verify" });
   }
 
   const token = generateAuthToken(user);
