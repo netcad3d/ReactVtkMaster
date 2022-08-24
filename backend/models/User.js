@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     minlength: 3,
     maxlength: 30,
+	index: true
   },
   email: {
     type: String,
@@ -16,20 +17,23 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 5,
     maxlength: 255,
+	index: true
   },
   password: {
     type: String,
     required: true,
     minlength: 6,
     maxlength: 1024,
+	index: true
   },
   verified: {
 	type: Boolean,
 	default: false,
+	index: true
   },
-  createdAt: { 
+  deactivatedOn: {
 	type: Date,
-	default: Date.now()}
+	index: true },
 });
 
 const User = mongoose.model("User", UserSchema);
