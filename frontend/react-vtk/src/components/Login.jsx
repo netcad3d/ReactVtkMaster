@@ -18,7 +18,7 @@ const Login = () => {
   });
 
   useEffect(() => {
-    if (auth._id&  localStorage.getItem('verify')) {
+    if (auth._id) {
       navigate("/");
     }
   }, [auth._id, navigate]);
@@ -97,11 +97,11 @@ const Login = () => {
                 </span>
               </p>
             </div>
-			<div className="flex justify-center">
-				<p className="text-sm  p-1 text-secondary cursor-pointer hover:text-secondaryDark transition-all duration-100">
-					Şifrenizi mi unuttunuz?
-				</p>
-			</div>
+            <div className="flex justify-center">
+              <p className="text-sm  p-1 text-secondary cursor-pointer hover:text-secondaryDark transition-all duration-100">
+                Şifrenizi mi unuttunuz?
+              </p>
+            </div>
           </form>
         </div>
       </div>
