@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../slices/authSlice";
 
@@ -22,6 +25,16 @@ const Login = () => {
   useEffect(() => {
     if (auth._id && auth.verified) {
       navigate("/");
+      toast.success("Giriş Başarılı!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   }, [auth._id, navigate]);
 

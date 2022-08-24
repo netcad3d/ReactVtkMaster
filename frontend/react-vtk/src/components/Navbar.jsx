@@ -5,7 +5,8 @@ import { NavLink } from "react-router-dom";
 import { Cross as Hamburger } from "hamburger-react";
 import { logoutUser } from "../slices/authSlice";
 
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,17 @@ const Navbar = () => {
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="shadow-md z-20 w-full fixed top-0 left-0">
         <div className="md:flex items-center justify-between bg-secondary/60 py-4 ">
           <div className="font-bold text-2x1 cursor-pointer flex item-center text-white">
@@ -66,7 +78,7 @@ const Navbar = () => {
               </NavLink>
             </li>
 
-            {auth._id  ? (
+            {auth._id ? (
               <li
                 className="flex mr-5 md:mt-2 mt-10 text-white cursor-pointer"
                 onClick={() => {
