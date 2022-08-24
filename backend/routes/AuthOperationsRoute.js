@@ -52,7 +52,7 @@ router.post("/", async (req, res) => {
       await sendEmail(user.email, "Verify Email", url);
     }
     return res
-      .status(400)
+      .status(200)
       .send({ message: "An Email sent to your account please verify" });
   }
 
