@@ -17,8 +17,10 @@ const Login = () => {
     password: "",
   });
 
+  console.log(auth);
+
   useEffect(() => {
-    if (auth._id) {
+    if (auth._id && auth.verified) {
       navigate("/");
     }
   }, [auth._id, navigate]);

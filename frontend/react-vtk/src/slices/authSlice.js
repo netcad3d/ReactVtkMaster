@@ -108,7 +108,7 @@ const authSlice = createSlice({
           email: user.email,
           _id: user._id,
           registerStatus: "success",
-          verifyStatus: user.verified,
+          verified: user.verifyStatus,
         };
       } else return state;
     });
@@ -125,6 +125,7 @@ const authSlice = createSlice({
     builder.addCase(loginUser.fulfilled, (state, action) => {
       if (action.payload) {
         const user = jwtDecode(action.payload);
+        console.log(user);
         return {
           ...state,
           token: action.payload,
@@ -132,7 +133,7 @@ const authSlice = createSlice({
           email: user.email,
           _id: user._id,
           loginStatus: "success",
-          verifyStatus: user.verified,
+          verified: user.verifyStatus,
         };
       } else return state;
     });
