@@ -5,7 +5,7 @@ const express = require("express");
 const { User } = require("../models/User");
 const generateAuthToken = require("../utils/genAuthToken");
 //mail imports
-const{Token}=require("../models/token");
+const Token=require("../models/token");
 const sendEmail=require("../utils/sendEmail");
 const crypto=require("crypto");
 //
@@ -46,19 +46,21 @@ router.post("/", async (req, res) => {
   if (!isValidPassword) return res.status(400).send("Yanlış email veya şifre");
 
 //logged in successfully
-	let tokenVrf=await new Token.findOne({userId:user._id});
+	let tokenVrf=await  Token.findOne({userId:user._id});
 	if(!tokenVrf){
 		tokenVrf=await new Token({
 			userId:user._id,
-			token:crypto.randomBytes(32).toString("hex"),
+			token:crypto.randomBytes(12).toString("hex"),
 		}).save();
 
-		const url=`${process.env.BASE_URL}users/${user_id}/verify/${tokenVrf.token}`;
+		const url=`${process.env.BASE_URL}users/${user._id}/verify/${tokenVrf.token}`;
 		// send verify email
 		await sendEmail(user.email,"Verify Email",url);
 
 	}
-	res.status(400).write({message:"An Email sent to your account ,please verify your email first: "});
+	console.log(user.verified);
+	if(!user.verified)
+	res.status(400).write("An Email sent to your account ,please verify your email first: ");
 
 
   const token = generateAuthToken(user);

@@ -1,3 +1,4 @@
+require('dotenv').config(); 
 const nodemailer=require('nodemailer');
 module.exports= async(email,subject,text)=>{
 	try{
@@ -7,8 +8,8 @@ module.exports= async(email,subject,text)=>{
 			port:Number(process.env.EMAIL_PORT),
 			secure:Boolean(process.env.SECURE),
 			auth:{
-				user:process.env.EMAIL,
-				pass:process.env.PASS
+				user:"erenpaul13@gmail.com",
+				pass:"abdxexamcukvlocv"
 			}
 		});
 

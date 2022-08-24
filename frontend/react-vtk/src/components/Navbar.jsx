@@ -11,6 +11,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const auth = useSelector((state) => state.auth);
+  console.log(auth);
 
   return (
     <>
@@ -65,7 +66,7 @@ const Navbar = () => {
               </NavLink>
             </li>
 
-            {auth._id ? (
+            {auth._id  ? (
               <li
                 className="flex mr-5 md:mt-2 mt-10 text-white cursor-pointer"
                 onClick={() => {

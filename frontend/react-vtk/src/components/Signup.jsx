@@ -33,8 +33,9 @@ const Signup = () => {
 
   useEffect(() => {
     if (auth._id) {
+		//axios.get(`http://localhost:3000/api/users/${auth._id}`)
       navigate("/signup");
-	  setMsg("kayıt başarılı");
+	  setMsg("An email sent to yout email address. Please verify your email to login");
 
     }
   }, [auth._id, navigate]);

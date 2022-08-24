@@ -18,7 +18,7 @@ const Login = () => {
   });
 
   useEffect(() => {
-    if (auth._id) {
+    if (auth._id&  localStorage.getItem('verify')) {
       navigate("/");
     }
   }, [auth._id, navigate]);

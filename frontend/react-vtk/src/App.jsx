@@ -13,6 +13,7 @@ import GeometryViewer from "./components/GeometryViewer";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import ManyRenderers from "./components/ManyRenderers";
+import EmailVerify from "./components/EmailVerify";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         ></Route>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+		<Route path="/:id/verify/:token" element={<EmailVerify />} />
       </Routes>
     </>
   );

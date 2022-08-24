@@ -3,9 +3,11 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 const requireAuth = require("../middlewares/requireAuth");
+const mongoose = require("mongoose");
+
 
 //mail imports
-const {Token}=require("../models/token");
+const Token=require("../models/token");
 const sendEmail=require("../utils/sendEmail");
 const crypto=require("crypto");
 //
@@ -113,21 +115,35 @@ router.get("/getFile/:id", requireAuth, async (req, res) => {
   }
 });
 
+// verify email
+
 router.get("/:id/verify/:token", async (req, res) => {
 	try{
+		console.log("heyy");
 		const user= await User.findOne({_id:req.params.id});
 		if(!user) return res.status(400).send({message:"Invalid Link"});
-
+		console.log(user);
+		console.log(req.params.token);
+		console.log(typeof req.params.token);
+		//console.log(mongoose.Types.ObjectId(req.params.token));
 		const token= await Token.findOne({
 			userId:user._id,
-			_id:req.params.token});
+			token:req.params.token});
+			console.log("token findounu geçti");
+			console.log(token);
 
 		if(!token) return res.status(400).send({message:"Invalid Link"});
 
 		await User.updateOne({_id:user._id},{verified:true});
-		await token.remove();
+		
 
-		res.status(200).send({message:"Account Verified"})
+		console.log('updateyi geçti');
+		console.log(user);
+		console.log(user.verified);
+		await token.remove();
+		let usr=await User.findOne({_id:req.params.id});
+
+		res.status(200).send({message:"Account Verified",verified:usr.verified});
 
 	}
 	catch(err){
