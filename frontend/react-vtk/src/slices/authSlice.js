@@ -14,6 +14,7 @@ const initialState = {
   loginStatus: "",
   loginError: "",
   userLoaded: false,
+  verified: false,
 };
 
 export const registerUser = createAsyncThunk(
@@ -54,7 +55,6 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -64,6 +64,7 @@ const authSlice = createSlice({
 
       if (token) {
         const user = jwtDecode(token);
+        console.log(user);
         return {
           ...state,
           token,
@@ -71,7 +72,7 @@ const authSlice = createSlice({
           email: user.email,
           _id: user._id,
           userLoaded: true,
-
+          verified: user.verifyStatus,
         };
       } else return { ...state, userLoaded: true };
     },
@@ -89,6 +90,7 @@ const authSlice = createSlice({
         loginStatus: "",
         loginError: "",
         userLoaded: false,
+        verified: false,
       };
     },
   },
@@ -106,6 +108,7 @@ const authSlice = createSlice({
           email: user.email,
           _id: user._id,
           registerStatus: "success",
+          verifyStatus: user.verified,
         };
       } else return state;
     });
@@ -129,6 +132,7 @@ const authSlice = createSlice({
           email: user.email,
           _id: user._id,
           loginStatus: "success",
+          verifyStatus: user.verified,
         };
       } else return state;
     });

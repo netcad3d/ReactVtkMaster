@@ -12,10 +12,11 @@ const Home = () => {
     setFiles(savedFiles);
   };
   const authProps = useSelector((state) => state.auth);
+  console.log(authProps);
 
   return (
     <>
-      {authProps._id ? (
+      {authProps._id && authProps.verified === true ? (
         <div className="flex flex-col justify-center items-center bg-primary ">
           <div className="flex flex-col w-full h-[100vh] md:h-[90vh] justify-center items-center md:flex-row ">
             <div

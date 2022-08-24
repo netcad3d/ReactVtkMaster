@@ -8,6 +8,7 @@ const genAuthToken = (user) => {
       _id: user._id,
       username: user.username,
       email: user.email,
+      verifyStatus: user.verified,
     },
     secretKey
   );
