@@ -49,7 +49,7 @@ router.post("/", async (req, res) => {
 
       const url = `${process.env.BASE_URL}${user._id}/verify/${tokenVrf.token}`;
       // send verify email
-      await sendEmail(user.email, "Verify Email", url);
+      await sendEmail(user.email, "Netcad3d-Verify Email", url);
     }
   }
 
