@@ -34,9 +34,11 @@ router.post("/", async (req, res) => {
 			const url=`${process.env.BASE_URL}ResetPass/${user._id}/${token.token}`;
 			console.log(url);
 			console.log(user.email);
-			await sendEmail(user.email,"Netcad3d-Password Reset",url);
+			await sendEmail(user.email,'Password Reset Link',url);
+			
 			res.status(200).send({message:"Password reset link sent to your email"});
-		
+			console.log(url);
+			
 
 	} catch (error) {
 		res.status(500).send({message:"Internal Server error"});
