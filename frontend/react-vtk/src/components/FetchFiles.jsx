@@ -96,8 +96,6 @@ const FetchFiles = () => {
   };
 
   const viewFileHandler = (fileId) => {
-    console.log(fileId);
-
     navigate(`/poly`, { state: { fileId } });
   };
 

@@ -213,7 +213,6 @@ const ManyRenderers = () => {
       ///read and rendervtk files
 
       function addRenderer(url) {
-        console.log(url);
         const mesh = meshes[meshIndex];
         const prop = properties[propertyIndex];
         const background = colors[bgIndex];
@@ -280,23 +279,16 @@ const ManyRenderers = () => {
       document.body.appendChild(checkbox);
       document.body.appendChild(label);
       document.body.appendChild(document.createElement("br"));
-      // filter vtk files
-      const filteredFiles = files.filter((file) => file.extension === ".vtk");
 
-      filteredFiles.forEach((file) => {
-        const url = file.url;
-        const fileId = file._id;
+      files.forEach((file) => {
+        console.log(file);
+        const fileId = file.fileId;
 
-        const urlNew = url.replace(
-          `/uploads/${file.origName}`,
-          `/getFile/${fileId}`
-        );
-        addRenderer(urlNew);
+        const url = `http://localhost:3000/getFile/${fileId}`;
+
+        addRenderer(url);
       });
 
-      // for (let i = 0; i < 2; i++) {
-      //  addRenderer(url);
-      //}
       resize();
 
       function updateCamera(renderer) {
