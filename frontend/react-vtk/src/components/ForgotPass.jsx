@@ -1,30 +1,38 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios";
 import styles from "../Styling/forgotPass.module.css";
-
+import { useNavigate } from "react-router-dom";
 const ForgotPass = () => {
+	const navigate = useNavigate();
 	const [email, setEmail] = useState("");
 	const [msg, setMsg] = useState("");
 	const [error, setError] = useState("");
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		try {
-			const url = `http://localhost:3000/api/password-reset`;
-			const { data } = await axios.post(url, { email });
-			setMsg(data.message);
-			setError("");
-		} catch (error) {
-			if (
-				error.response &&
-				error.response.status >= 400 &&
-				error.response.status <= 500
-			) {
-				setError(error.response.data.message);
-				setMsg("");
+	
+		const handleSubmit = async (e) => {
+			e.preventDefault();
+	
+			try {
+				const url = `http://localhost:3000/api/password-reset`;
+				const { data } = await axios.post(url, { email });
+				setMsg(data.message);
+				setError("");
+				//navigate(`/s`)
+			} catch (error) {
+				if (
+					error.response &&
+					error.response.status >= 400 &&
+					error.response.status <= 500
+				) {
+					setError(error.response.data.message);
+					setMsg("");
+				}
 			}
-		}
-	};
+		};
+
+
+
+	
 
 	return (
 		<div className={styles.container}>
@@ -41,7 +49,7 @@ const ForgotPass = () => {
 				/>
 				{error && <div className={styles.error_msg}>{error}</div>}
 				{msg && <div className={styles.success_msg}>{msg}</div>}
-				<button type="submit" className={styles.green_btn}>
+				<button type="submit" className={styles.green_btn} >
 					Submit
 				</button>
 			</form>

@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
   if (!isValidPassword) return res.status(400).send("Yanlış email veya şifre");
 
 //logged in successfully
-	let tokenVrf=await  Token.findOne({userId:user._id});
+/*	let tokenVrf=await  Token.findOne({userId:user._id});
 	if(!tokenVrf){
 		tokenVrf=await new Token({
 			userId:user._id,
@@ -57,7 +57,7 @@ router.post("/", async (req, res) => {
 		// send verify email
 		await sendEmail(user.email,"Verify Email",url);
 
-	}
+	}*/
 	console.log(user.verified);
 	if(!user.verified)
 	res.status(400).write("An Email sent to your account ,please verify your email first");
