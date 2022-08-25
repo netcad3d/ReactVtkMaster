@@ -40,7 +40,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+	navigate("/");
     dispatch(loginUser(user));
   };
   useEffect(() => {
