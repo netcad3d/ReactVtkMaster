@@ -1,8 +1,8 @@
 const router=require('express').Router();
 const { User } = require("../models/User");
 
+const sendEmail = require("../utils/sendEmail");
 const Token=require("../models/token");
-const sendEmail=require("../utils/sendEmail");
 const crypto=require("crypto");
 
 const Joi=require("joi");
@@ -13,6 +13,8 @@ const bcrypt=require("bcryptjs");
 
 router.post("/", async (req, res) => {
 	try {
+
+
 		const emailSchema = Joi.object({
 			email: Joi.string().required().email().label("Email"),
 		})
@@ -85,9 +87,11 @@ router.post("/:id/:token", async (req, res) => {
 		const salt = await bcrypt.genSalt(10);
 		const hashPassword = await bcrypt.hash(req.body.password, salt);
 
+		const usr = await User.findOne({ _id: req.params.id });
 		// new password db
-		user.password = hashPassword;
-		await user.save();
+		usr.password = hashPassword;
+
+		await usr.save();
 		await token.remove();
 
 		res.status(200).send({ message: "Password reset successfully" });
