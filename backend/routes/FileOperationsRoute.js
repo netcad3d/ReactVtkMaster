@@ -55,6 +55,7 @@ const storage = new GridFsStorage({
 const upload = multer({ storage });
 
 //! @route POST /upload
+//! @desc Uploads file to DB
 router.post("/uploads", [upload.single("file"), requireAuth], (req, res) => {
   const userId = req.user._id;
   const reqFile = req.file;
