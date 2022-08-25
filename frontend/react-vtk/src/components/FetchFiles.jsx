@@ -50,13 +50,13 @@ const FetchFiles = () => {
       text: "Bu işlem geri döndürülemez!",
       icon: "warning",
       showCancelButton: true,
-      cancelButtonText: "Yoo Silme!",
+      cancelButtonText: "Vazgeç!",
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Evet, sil!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Başarıyla silindi!", "Silindi Babuş", "success");
+        Swal.fire("Başarıyla silindi!", "Silindi", "success");
 
         axios
           .delete(`http://localhost:3000/deleteFile/${fileId}`, config)
@@ -105,7 +105,7 @@ const FetchFiles = () => {
     if (files.length === 0) {
       Swal.fire({
         title: "Hata",
-        text: "Lütfen bir dosya seçiniz!",
+        text: "Henüz bir dosya yüklemediniz!",
         icon: "error",
         confirmButtonColor: "#3085d6",
         confirmButtonText: "Tamam",
