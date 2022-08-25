@@ -9,10 +9,9 @@ const Token = require("../models/token");
 
 //
 const multer = require("multer");
-const { GridFsStorage } = require("multer-gridfs-storage");
+const upload = require("../middlewares/upload");
 const Grid = require("gridfs-stream");
 const methodOverride = require("method-override");
-const crypto = require("crypto");
 
 const File = require("../models/File");
 const { User } = require("../models/User");
@@ -29,30 +28,10 @@ let gfs;
 
 connection.once("open", () => {
   //! Init stream
-  gfs = Grid(connection.db, mongoose.mongo);
-  gfs.collection("uploads");
+  gfs = new mongoose.mongo.GridFSBucket(connection.db, {
+    bucketName: "uploads",
+  });
 });
-
-//! Create storage engine
-const storage = new GridFsStorage({
-  url: mongoUri,
-  file: (req, file) => {
-    return new Promise((resolve, reject) => {
-      crypto.randomBytes(16, (err, buf) => {
-        if (err) {
-          return reject(err);
-        }
-        const filename = buf.toString("hex") + path.extname(file.originalname);
-        const fileInfo = {
-          filename: filename,
-          bucketName: "uploads",
-        };
-        resolve(fileInfo);
-      });
-    });
-  },
-});
-const upload = multer({ storage });
 
 //! @route POST /upload
 //! @desc Uploads file to DB
@@ -114,7 +93,8 @@ router.post("/uploads", [upload.single("file"), requireAuth], (req, res) => {
 //     });
 //   });
 // });
-
+//! @route GET /fetchFiles
+//! @desc Fetch all user files from DB
 router.get("/fetchFiles", requireAuth, async (req, res) => {
   const userId = req.user._id;
   const files = await File.find({ userId });
@@ -122,25 +102,33 @@ router.get("/fetchFiles", requireAuth, async (req, res) => {
   res.json(files);
 });
 
-router.delete("/deleteFile/:id", requireAuth, async (req, res) => {
+//! @route GET /fetchFile/:id
+//! @desc Fetch a file from DB
+router.get("/getFile/:id", async (req, res) => {
   const id = req.params.id;
 
-  const file = await File.findById(id);
+  if (!id || id === "undefined") return res.status(400).send("no image id");
 
-  if (file) {
-    await File.findByIdAndDelete(id);
+  const _id = new mongoose.Types.ObjectId(id);
 
-    //delete file locally
-    const filePath = path.join(__dirname, "../uploads", file.origName);
-    fs.unlink(filePath, (err) => {
-      if (err) throw err;
-      console.log("File deleted");
-    });
+  gfs.find({ _id }).toArray((err, files) => {
+    if (!files || files.length === 0)
+      return res.status(400).send("no files exist");
+    gfs.openDownloadStream(_id).pipe(res);
+  });
+});
 
-    const files = await File.find();
-    res.json(files);
-  } else {
-    res.json({ message: "File not found" });
+//! @route DELETE /deleteFile/:id
+//! @desc Delete a file from DB
+router.delete("/deleteFile/:filename", requireAuth, async (req, res) => {
+  const filename = req.params.filename;
+
+  try {
+    await gfs.files.deleteOne({ filename });
+    res.send("File Deleted");
+  } catch (err) {
+    console.log(err);
+    res.send(err);
   }
 });
 
@@ -158,22 +146,6 @@ router.delete("/deleteAllFiles", requireAuth, async (req, res) => {
   });
 
   res.json({ message: "All files deleted" });
-});
-
-router.get("/getFile/:id", async (req, res) => {
-  const id = req.params.id;
-
-  const file = await File.findById(id);
-
-  if (file) {
-    res.download(__dirname + "/../uploads/" + file.origName, (err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
-  } else {
-    res.json({ message: "File not found" });
-  }
 });
 
 // verify email

@@ -12,10 +12,12 @@ import { useNavigate } from "react-router-dom";
 
 const Poly = () => {
   const { state } = useLocation();
-  const { filesToSend, _id } = state;
+  const vtkContainerRef = useRef();
+  const context = useRef();
+  const { fileId } = state;
 
-  const foundFile = filesToSend.find((file) => file._id === _id);
-  const url = foundFile.url;
+  console.log(fileId);
+
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
@@ -25,13 +27,7 @@ const Poly = () => {
     }
   }, []);
 
-  const vtkContainerRef = useRef(null);
-  const context = useRef(null);
-
-  const urlNew = url.replace(
-    `/uploads/${foundFile.origName}`,
-    `/getFile/${_id}`
-  );
+  const url = `http://localhost:3000/getFile/${fileId}`;
 
   useEffect(() => {
     if (!context.current) {
@@ -46,7 +42,7 @@ const Poly = () => {
 
       const reader = vtkPolyDataReader.newInstance();
 
-      reader.setUrl(`${urlNew}`).then(() => {
+      reader.setUrl(`${url}`).then(() => {
         const polydata = reader.getOutputData(0);
         const mapper = vtkMapper.newInstance();
         const actor = vtkActor.newInstance();

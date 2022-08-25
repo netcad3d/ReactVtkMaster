@@ -95,10 +95,10 @@ const FetchFiles = () => {
     });
   };
 
-  const viewFileHandler = (e, filesToSend, _id) => {
-    e.preventDefault();
+  const viewFileHandler = (fileId) => {
+    console.log(fileId);
 
-    navigate(`/poly`, { state: { filesToSend, _id } });
+    navigate(`/poly`, { state: { fileId } });
   };
 
   const viewAllAVtkFiles = (e, files) => {
@@ -242,8 +242,7 @@ const FetchFiles = () => {
                 Dosyayı Sil
               </button>
               <button
-                onClick={(e) => viewFileHandler(e, files, file._id)}
-                // onClick={() => onVisualize(file.url)}
+                onClick={(e) => viewFileHandler(file.fileId)}
                 className="text-lg md:text-xl font-semibold btn-primary w-full md:w-[200px] mt-2 md:mt-0"
               >
                 Görüntüle

@@ -9,7 +9,7 @@ const FileSchema = new mongoose.Schema({
   originalName: String,
   fileName: String,
   size: Number,
-  fileId: String,
+  fileId: mongoose.Schema.Types.ObjectId,
   uploadDate: Date,
   contentType: String,
 });
