@@ -19,6 +19,7 @@ import EmailVerifyPage from "./pages/EmailVerifyPage";
 import EmailVerify from "./components/EmailVerify";
 import NotFound from "./pages/NotFound";
 import ResetPass from "./components/ResetPass";
+import ForgotPass from "./components/ForgotPass";
 
 function App() {
   return (
@@ -38,9 +39,10 @@ function App() {
         ></Route>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-		<Route path="/ForgotPassword" element={<ResetPass></ResetPass>} />
+		<Route path="/ResetPass/id/:token:" element={<ResetPass></ResetPass>} />
+		<Route path="/ForgotPass" element={<ForgotPass></ForgotPass>} />
         <Route path="/:id/verify/:token" element={<EmailVerifyPage />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/NotFound" element={<NotFound />} />
       </Routes>
     </>
   );

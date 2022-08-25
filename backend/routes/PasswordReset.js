@@ -17,20 +17,26 @@ router.post("/", async (req, res) => {
 			email: Joi.string().required().email().label("Email"),
 		})
 		const { error } = emailSchema.validate(req.body);
-		if (error) return res.status(400).send(error.details[0].message);
+		if (error) return res.status(400).send({message:error.details[0].message});
+		console.log(req.body.email);
 		let user = await User.findOne({ email: req.body.email });
+		console.log(user);
 		if(!user) return res.status(409).send({message:"User with this email does not exist"});
-		let token=Token.findOne({userId:user._id});
+		let token= await Token.findOne({userId:user._id});
+		console.log(token);
 		if(!token) {
-			token=new Token({
+			token= await new Token({
 				userId:user._id,
 				token:crypto.randomBytes(12).toString("hex"),
 			}).save();
-
-			const url=`${process.env.BASE_URL}ResetPass/${user._id}/reset/${token.token}`;
+			
+		}
+			const url=`${process.env.BASE_URL}ResetPass/${user._id}/${token.token}`;
+			console.log(url);
+			console.log(user.email);
 			await sendEmail(user.email,"Netcad3d-Password Reset",url);
 			res.status(200).send({message:"Password reset link sent to your email"});
-		}
+		
 
 	} catch (error) {
 		res.status(500).send({message:"Internal Server error"});
@@ -60,7 +66,7 @@ router.post("/:id/:token", async (req, res) => {
 			password: passwordComplexity().required().label("Password"),
 		});
 		const { error } = passwordSchema.validate(req.body);
-		if(error) return res.status(400).send(error.details[0].message);
+		if(error) return res.status(400).send({message:error.details[0].message});
 
 		const user = await User.findOne({ _id: req.params.id });
 		if (!user) return res.status(400).send({ message: "Invalid link" });
