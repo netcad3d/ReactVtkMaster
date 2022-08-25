@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const Joi = require("joi");
+const passwordComplexity=require("joi-password-complexity");
 const express = require("express");
 
 const { User } = require("../models/User");
@@ -16,8 +17,8 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   const schema = Joi.object({
     username: Joi.string().min(3).max(30).required(),
-    email: Joi.string().min(5).max(255).required().email(),
-    password: Joi.string().min(6).max(1024).required(),
+    email: Joi.string().required().email().label("Email"),
+    password: passwordComplexity().required().label("Password"),
   });
   const { error } = schema.validate(req.body);
 
