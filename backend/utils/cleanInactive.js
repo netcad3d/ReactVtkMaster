@@ -5,14 +5,14 @@ const File = require("../models/File");
 const checkInterval = 86400000; //1 day in milliseconds
 
 const checkUsers=()=> {
-	console.log("*** Cleaner Looking For Users ***");
+	console.log("*** Cleaner Looking For Inactive Users ***");
   
 	let userId;
 	User.findOne({ verified: false, deactivatedOn: mdq.beforeLastDays(2) })
 	  .exec()
 	  .then((user) => {
 		if (!user) {
-		  throw "No User Found"; //this message shows in the catch block below when no user is found
+		  throw "No Inactive Account Found"; //this message shows in the catch block below when no user is found
 		}
 		/*else {
 		  userId = user._id;

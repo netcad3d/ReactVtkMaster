@@ -113,7 +113,8 @@ const Login = () => {
               </p>
             </div>
             <div className="flex justify-center">
-              <p className="text-sm  p-1 text-secondary cursor-pointer hover:text-secondaryDark transition-all duration-100">
+              <p className="text-sm  p-1 text-secondary cursor-pointer hover:text-secondaryDark transition-all duration-100"
+			     onClick={() => navigate(`/ForgotPassword`)}>
                 Şifrenizi mi unuttunuz?
               </p>
             </div>
