@@ -216,21 +216,22 @@ const FetchFiles = () => {
             <div className="flex flex-col w-full">
               <p className="text-white text-lg">
                 <span className="text-secondary">File Name: </span>
-                {file.name}
+                {file.originalName}
               </p>
               <p className="text-white text-lg">
                 <span className="text-secondary">File Extension: </span>{" "}
-                {file.extension}
+                {file.originalName.split(".")[1]}
               </p>
               <p className="text-white text-lg">
                 <span className="text-secondary">File Size: </span>{" "}
                 {file.size / 1000000} mb
               </p>
               <p className="text-white text-lg hidden md:block">
-                <span className="text-secondary ">File Url: </span> {file.url}
+                <span className="text-secondary ">File Upload Date: </span>{" "}
+                {file.uploadDate}
               </p>
               <p className="text-white text-lg hidden md:block">
-                <span className="text-secondary ">File Id: </span> {file._id}
+                <span className="text-secondary ">File Id: </span> {file.fileId}
               </p>
             </div>
             <div className="flex justify-end mt-3 md:mt-0 flex-col md:flex-row w-full">

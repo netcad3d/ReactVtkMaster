@@ -4,14 +4,14 @@ const FileSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
-	index:true
+    index: true,
   },
-  origName: String,
-  name: String,
-  extension: String,
+  originalName: String,
+  fileName: String,
   size: Number,
-  url: String,
-
+  fileId: String,
+  uploadDate: Date,
+  contentType: String,
 });
 
 module.exports = mongoose.model("File", FileSchema);

@@ -1,60 +1,118 @@
 const express = require("express");
-const multer = require("multer");
 const path = require("path");
-const fs = require("fs");
 const requireAuth = require("../middlewares/requireAuth");
+const fs = require("fs");
 const mongoose = require("mongoose");
 
 //mail imports
 const Token = require("../models/token");
-const sendEmail = require("../utils/sendEmail");
-const crypto = require("crypto");
+
 //
+const multer = require("multer");
+const { GridFsStorage } = require("multer-gridfs-storage");
+const Grid = require("gridfs-stream");
+const methodOverride = require("method-override");
+const crypto = require("crypto");
 
 const File = require("../models/File");
-const { TokenExpiredError } = require("jsonwebtoken");
 const { User } = require("../models/User");
 const router = express.Router();
 
-//! Multer Config
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads");
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + " - " + file.originalname);
-  },
+router.use(methodOverride("_method"));
+
+//! DB Connection
+const mongoUri = process.env.MONGO_URI;
+const connection = mongoose.createConnection(mongoUri);
+
+//! GridFS Storage
+let gfs;
+
+connection.once("open", () => {
+  //! Init stream
+  gfs = Grid(connection.db, mongoose.mongo);
+  gfs.collection("uploads");
 });
 
-const upload = multer({ storage }).array("file");
+//! Create storage engine
+const storage = new GridFsStorage({
+  url: mongoUri,
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
+        }
+        const filename = buf.toString("hex") + path.extname(file.originalname);
+        const fileInfo = {
+          filename: filename,
+          bucketName: "uploads",
+        };
+        resolve(fileInfo);
+      });
+    });
+  },
+});
+const upload = multer({ storage });
 
-router.post("/uploads", [upload, requireAuth], (req, res) => {
-  const files = req.files;
+//! @route POST /upload
+router.post("/uploads", [upload.single("file"), requireAuth], (req, res) => {
   const userId = req.user._id;
+  const reqFile = req.file;
 
-  files.forEach((file) => {
-    //full name
-    const origName = file.filename;
-    const extension = path.extname(file.originalname);
-    const name = path.basename(file.originalname, extension);
-    const size = file.size;
+  const file = new File({
+    userId: userId,
+    originalName: reqFile.originalname,
+    fileName: reqFile.filename,
+    size: reqFile.size,
+    fileId: reqFile.id,
+    uploadDate: reqFile.uploadDate,
+    contentType: reqFile.contentType,
+  });
 
-    const url = `http://localhost:3000/uploads/${file.filename}`;
-
-    const newFile = new File({
-      origName,
-      name,
-      extension,
-      size,
-      url,
-      userId,
-    });
-
-    newFile.save().then((file) => {
-      res.json(file);
-    });
+  file.save().then((file) => {
+    res.json(file);
   });
 });
+
+// //! Multer Config
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "uploads");
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now() + " - " + file.originalname);
+//   },
+// });
+
+// const upload = multer({ storage }).array("file");
+
+// router.post("/uploads", [upload, requireAuth], (req, res) => {
+//   const files = req.files;
+//   const userId = req.user._id;
+
+//   files.forEach((file) => {
+//     //full name
+//     const origName = file.filename;
+//     const extension = path.extname(file.originalname);
+//     const name = path.basename(file.originalname, extension);
+//     const size = file.size;
+
+//     const url = `http://localhost:3000/uploads/${file.filename}`;
+
+//     const newFile = new File({
+//       origName,
+//       name,
+//       extension,
+//       size,
+//       url,
+//       userId,
+//     });
+
+//     newFile.save().then((file) => {
+//       res.json(file);
+//     });
+//   });
+// });
 
 router.get("/fetchFiles", requireAuth, async (req, res) => {
   const userId = req.user._id;

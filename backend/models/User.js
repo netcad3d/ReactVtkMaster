@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 
-
-
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -9,7 +7,7 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     minlength: 3,
     maxlength: 30,
-	index: true
+    index: true,
   },
   email: {
     type: String,
@@ -17,23 +15,24 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 5,
     maxlength: 255,
-	index: true
+    index: true,
   },
   password: {
     type: String,
     required: true,
     minlength: 6,
     maxlength: 1024,
-	index: true
+    index: true,
   },
   verified: {
-	type: Boolean,
-	default: false,
-	index: true
+    type: Boolean,
+    default: false,
+    index: true,
   },
   deactivatedOn: {
-	type: Date,
-	index: true },
+    type: Date,
+    index: true,
+  },
 });
 
 const User = mongoose.model("User", UserSchema);
