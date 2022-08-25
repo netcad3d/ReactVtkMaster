@@ -42,7 +42,7 @@ const FetchFiles = () => {
       });
   };
 
-  const deleteFile = (e, _id) => {
+  const deleteFile = (e, fileId) => {
     e.preventDefault();
 
     Swal.fire({
@@ -59,7 +59,7 @@ const FetchFiles = () => {
         Swal.fire("Başarıyla silindi!", "Silindi Babuş", "success");
 
         axios
-          .delete(`http://localhost:3000/deleteFile/${_id}`, config)
+          .delete(`http://localhost:3000/deleteFile/${fileId}`, config)
           .then((res) => {
             res.status === 200
               ? toast.success("Başarıyla silindi.", {
@@ -237,7 +237,7 @@ const FetchFiles = () => {
             <div className="flex justify-end mt-3 md:mt-0 flex-col md:flex-row w-full">
               <button
                 className="text-lg md:text-xl font-semibold btn-primary mr-2 w-full md:w-[200px]"
-                onClick={(e) => deleteFile(e, file._id)}
+                onClick={(e) => deleteFile(e, file.fileId)}
               >
                 Dosyayı Sil
               </button>
