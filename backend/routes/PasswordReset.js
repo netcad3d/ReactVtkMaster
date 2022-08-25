@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
 		console.log(req.body.email);
 		let user = await User.findOne({ email: req.body.email });
 		console.log(user);
-		if(!user) return res.status(409).send({message:"User with this email does not exist"});
+		if(!user) return res.status(409).send({message:"Bu email adresi ile kayıtlı bir kullanıcı bulunamadı."});
 		let token= await Token.findOne({userId:user._id});
 		console.log(token);
 		if(!token) {
@@ -36,9 +36,9 @@ router.post("/", async (req, res) => {
 			const url=`${process.env.BASE_URL}ResetPass/${user._id}/${token.token}`;
 			console.log(url);
 			console.log(user.email);
-			await sendEmail(user.email,'Password Reset Link',url);
+			await sendEmail(user.email,'Netcad3d Şifre Update',url);
 			
-			res.status(200).send({message:"Password reset link sent to your email"});
+			res.status(200).send({message:"Şifre yenileme linki mailinize gönderildi"});
 			console.log(url);
 			
 

@@ -38,7 +38,7 @@ const ForgotPass = () => {
 	return (
 		<div className={styles.container}>
 			<form className={styles.form_container} onSubmit={handleSubmit}>
-				<h1>Forgot Password</h1>
+				<h1>Şifremi Unuttum</h1>
 				<input
 					type="email"
 					placeholder="Email"
@@ -50,7 +50,7 @@ const ForgotPass = () => {
 				/>
 				{error && <div className={styles.error_msg}>{error}</div>}
 				{msg && <div className={styles.success_msg}>{msg}</div>}
-				<button type="submit" className={styles.green_btn} >
+				<button  className="btn-secondary p-1 w-full md:w-[200px] mt-6" type="submit">
 					Submit
 				</button>
 			</form>
