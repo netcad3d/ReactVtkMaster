@@ -16,6 +16,7 @@ const ForgotPass = () => {
 				const url = `http://localhost:3000/api/password-reset`;
 				const { data } = await axios.post(url, { email });
 				setMsg(data.message);
+				
 				setError("");
 				//navigate(`/s`)
 			} catch (error) {

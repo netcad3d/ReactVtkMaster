@@ -10,7 +10,7 @@ const ResetPass = () => {
 	const [error, setError] = useState("");
 	const param = useParams();
 
-	const url = `http://localhost:3000/password-reset/${param.id}/${param.token}`;
+	const url = `http://localhost:3000/api/password-reset/${param.id}/${param.token}`;
 
 	useEffect(() => {
 		const verifyUrl = async () => {
