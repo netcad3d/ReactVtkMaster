@@ -31,10 +31,7 @@ function App() {
         <Route path="/VolumeViewer" element={<VolumeViewer />} />
         <Route path="/VolumeClip" element={<VolumeClip />} />
         <Route path="/GeometryViewer" element={<GeometryViewer />} />
-        <Route
-          path="/ManyRenderers"
-          element={<ManyRenderers></ManyRenderers>}
-        ></Route>
+        <Route path="/ManyRenderers" element={<ManyRenderers />}></Route>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/ResetPass/:id/:token" element={<ResetPass></ResetPass>} />
