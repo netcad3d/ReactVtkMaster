@@ -78,7 +78,7 @@ const Navbar = () => {
               </NavLink>
             </li>
 
-            {auth._id && auth.verified === true ? (
+            {auth._id  ? (
               <div className="flex flex-col md:flex-row ">
                 <li
                   className="flex mr-5 md:mt-2 mt-10 text-white cursor-pointer"
