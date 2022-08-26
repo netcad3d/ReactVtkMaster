@@ -6,8 +6,12 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const helmet = require("helmet");
 
+// security packages
+const helmet = require("helmet");
+const rateLimit = require('express-rate-limit');
+
+// routes
 const FileOperationsRoute = require("./routes/FileOperationsRoute");
 
 const AuthOperationsRoute = require("./routes/AuthOperationsRoute");
@@ -21,6 +25,14 @@ const app = express();
 // secure headers
 app.use(helmet());
 app.disable('x-powered-by')
+
+// Restrict all routes to only 100 requests per IP address every 1o minutes
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000,    // 10 minutes
+    max: 100                     // 100 requests per IP
+});
+app.use(limiter);
+
 
 
 app.use(cors());
