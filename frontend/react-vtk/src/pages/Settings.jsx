@@ -1,10 +1,42 @@
 import React from "react";
 
-import { useSelector } from "react-redux";
+import styles from "../Styling/forgotPass.module.css";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import { GoVerified, GoUnverified } from "react-icons/go";
 
 const Settings = () => {
   const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const [msg, setMsg] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+	e.preventDefault();
+	const url = `http://localhost:3000/api/delete-account/${auth._id}`;
+	console.log(url);
+
+	try {
+		const { data } = await axios.delete(url);
+		setMsg(data.message);
+		setError("");
+		//window.location = "/login";
+	} catch (error) {
+		if (
+			error.response &&
+			error.response.status >= 400 &&
+			error.response.status <= 500
+		) {
+			setError(error.response.data.message);
+			setMsg("");
+		}
+	}
+};
+
 
   return (
     <div className="flex justify-center items-center bg-primary h-[100vh]">
@@ -64,12 +96,18 @@ const Settings = () => {
           </ul>
         </div>
         <div className="flex-[1] w-full flex justify-center items-center flex-col mt-3">
-          <button
+		<form onSubmit={handleSubmit}>
+			{error && <div className={styles.error_msg}>{error}</div>}
+						{msg && <div className={styles.success_msg}>{msg}</div>}
+			<button
+			type="submit"
             className="btn-secondary w-full md:w-[300px] mt-6"
             onClick={() => navigate("/login")}
           >
             Hesabı sil
           </button>
+			</form>
+         
         </div>
       </div>
     </div>

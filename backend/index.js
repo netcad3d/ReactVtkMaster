@@ -17,7 +17,7 @@ const FileOperationsRoute = require("./routes/FileOperationsRoute");
 const AuthOperationsRoute = require("./routes/AuthOperationsRoute");
 const SinginRoute = require("./routes/SinginRoute");
 const passwordResetRoutes = require("./routes/PasswordReset");
-// const requireAuth = require("./middlewares/requireAuth");
+const deleteAccountRoute = require("./routes/DeleteAccount");
 const checkUsers=require("./utils/cleanInactive");
 
 const app = express();
@@ -43,7 +43,7 @@ app.use(FileOperationsRoute);
 app.use("/api/signup", AuthOperationsRoute);
 app.use("/api/signin", SinginRoute);
 app.use("/api/password-reset", passwordResetRoutes);
-
+app.use("/api/delete-account", deleteAccountRoute);
 //! DB Connection
 const mongoUri = process.env.MONGO_URI;
 
