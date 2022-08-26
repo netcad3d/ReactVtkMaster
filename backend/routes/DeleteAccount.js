@@ -1,14 +1,17 @@
 const router=require('express').Router();
 const requireAuth=require('../middlewares/requireAuth');
+const mongoose = require("mongoose");
 const { User } = require("../models/User");
 const { File } = require("../models/File");
+
 
 // cascade delete user and its files
 
 router.delete('/:id', async (req, res) => {
 	console.log("delete sta");
-	console.log(req.params.id);
-	await User.findByIdAndDelete(req.params.id);
+
+	const id = new mongoose.Types.ObjectId(req.params.id);
+User.remove({ _id: id });
 
 
 	

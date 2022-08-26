@@ -36,16 +36,16 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
+UserSchema.pre('remove', async function(next) {
+	const user = this;
+	const id = new mongoose.Types.ObjectId(req.params.id);
+
+	await File.deleteMany({userId:id});
+	next();
+});
 
 const User = mongoose.model("User", UserSchema);
 
-UserSchema.pre('remove', async function(next) {
-	const user = this;
 
-	await File.deleteMany({userId:req.params.id},(err)=>{
-		if(err) return res.status(400).send(err);
 
-	})
-	next();
-})
 exports.User = User;
