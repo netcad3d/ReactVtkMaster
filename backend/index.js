@@ -17,7 +17,10 @@ const passwordResetRoutes = require("./routes/PasswordReset");
 const checkUsers=require("./utils/cleanInactive");
 
 const app = express();
+
+// secure headers
 app.use(helmet());
+app.disable('x-powered-by')
 
 
 app.use(cors());
