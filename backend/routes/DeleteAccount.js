@@ -6,4 +6,4 @@ router.delete('/:id', async (req, res) => {
   if (!user) return res.status(404).send("User not found");
   
   res.send(user);
-}
+});

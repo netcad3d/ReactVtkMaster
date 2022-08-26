@@ -6,6 +6,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const helmet = require("helmet");
 
 const FileOperationsRoute = require("./routes/FileOperationsRoute");
 
@@ -16,6 +17,7 @@ const passwordResetRoutes = require("./routes/PasswordReset");
 const checkUsers=require("./utils/cleanInactive");
 
 const app = express();
+app.use(helmet());
 
 
 app.use(cors());
