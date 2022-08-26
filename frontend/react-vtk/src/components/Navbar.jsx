@@ -12,6 +12,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const auth = useSelector((state) => state.auth);
+  console.log(auth);
 
   return (
     <>
@@ -77,7 +78,7 @@ const Navbar = () => {
               </NavLink>
             </li>
 
-            {auth._id ? (
+            {auth._id && auth.verified === true ? (
               <div className="flex flex-col md:flex-row ">
                 <li
                   className="flex mr-5 md:mt-2 mt-10 text-white cursor-pointer"

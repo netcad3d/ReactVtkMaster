@@ -29,15 +29,9 @@ const Signup = () => {
     e.preventDefault();
 
     dispatch(registerUser(user));
-
     e.target.reset();
+    navigate("/");
   };
-
-  useEffect(() => {
-    if (auth._id) {
-      navigate("/login");
-    }
-  }, [auth._id, navigate]);
 
   useEffect(() => {
     if (auth.registerStatus === "rejected") {

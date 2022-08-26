@@ -36,7 +36,9 @@ const EmailVerify = () => {
           </h1>
           <button
             className="btn-secondary w-full md:w-[300px] mt-6"
-            onClick={() => navigate("/login")}
+            onClick={() => {
+              navigate("/login");
+            }}
           >
             Giriş Yap
           </button>

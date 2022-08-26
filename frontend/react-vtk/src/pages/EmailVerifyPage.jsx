@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import styles from "../Styling/verify.module.css";
 
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import EmailVerify from "../components/EmailVerify";
