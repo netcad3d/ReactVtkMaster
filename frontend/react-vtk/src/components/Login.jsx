@@ -29,7 +29,7 @@ const Login = () => {
   console.log(auth);
 
   useEffect(() => {
-    if (auth._id && auth.verified) {
+    if (auth._id) {
       navigate("/");
       toast.success("Giriş Başarılı!", {
         position: "top-right",
@@ -46,7 +46,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/");
+
     dispatch(loginUser(user));
   };
   useEffect(() => {
