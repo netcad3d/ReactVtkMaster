@@ -3,15 +3,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import styles from "../Styling/verify.module.css";
 import { registerUser } from "../slices/authSlice";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
-import axios from "axios";
 import Swal from "sweetalert2";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faEye } from "@fortawesome/free-solid-svg-icons";
-const eye = <FontAwesomeIcon icon={faEye} />;
-
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -21,7 +16,7 @@ const Signup = () => {
   const [passwordShown, setPasswordShown] = useState(false);
 
   const togglePasswordVisiblity = () => {
-    setPasswordShown(passwordShown ? false : true);
+    setPasswordShown((prev) => !prev);
   };
 
   const [user, setUser] = useState({
@@ -103,22 +98,31 @@ const Signup = () => {
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
               />
             </div>
-			<div className="pass-wrapper">
-			<label htmlFor="password" className="text-sm">
+            <div className="pass-wrapper">
+              <label htmlFor="password" className="text-sm">
                 Şifre
               </label>
-        	{""}
-        	<input
-			className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:text-primary focus:ring-white focus:bg-secondary placeholder:text-primary"
-          	placeholder="Password"
-			id="password"
-         	 name="password"
-			onChange={(e) => setUser({ ...user, password: e.target.value })}
-          	type={passwordShown ? "text" : "password"}
-          	required
-        />
-        <i onClick={togglePasswordVisiblity}>{eye}</i>{" "}
-      </div>
+              {""}
+              <input
+                className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:text-primary focus:ring-white focus:bg-secondary placeholder:text-primary"
+                placeholder="Password"
+                id="password"
+                name="password"
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
+                type={passwordShown ? "text" : "password"}
+                required
+              />
+              <div className="mt-1">
+                {passwordShown ? (
+                  <AiFillEyeInvisible
+                    onClick={togglePasswordVisiblity}
+                    size={25}
+                  />
+                ) : (
+                  <AiFillEye onClick={togglePasswordVisiblity} size={25} />
+                )}
+              </div>
+            </div>
             <div className="flex justify-end">
               <button className="btn-secondary text-sm w-full ss:w-[200px] md:text-base p-2">
                 {auth.registerStatus === "pending" ? "Gönderliyor" : "Kaydol"}

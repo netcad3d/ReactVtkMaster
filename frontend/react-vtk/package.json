@@ -9,8 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@fortawesome/free-solid-svg-icons": "^6.1.2",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "@kitware/vtk.js": "^25.7.0",
     "@reduxjs/toolkit": "^1.8.4",
     "axios": "^0.27.2",
@@ -19,6 +17,7 @@
     "lottie-web": "^5.9.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.4.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^6.3.0",
     "react-toastify": "^9.0.8",

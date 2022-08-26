@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../slices/authSlice";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 import Swal from "sweetalert2";
 
@@ -14,6 +15,11 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePasswordVisiblity = () => {
+    setPasswordShown((prev) => !prev);
+  };
 
   const [user, setUser] = useState({
     email: "",
@@ -40,7 +46,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-	navigate("/");
+    navigate("/");
     dispatch(loginUser(user));
   };
   useEffect(() => {
@@ -86,11 +92,21 @@ const Login = () => {
               </label>
               <input
                 id="password"
-                type="password"
+                type={passwordShown ? "text" : "password"}
                 placeholder="Şifre"
                 className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:text-primary focus:ring-white focus:bg-secondary placeholder:text-primary"
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
               />
+              <div className="mt-1">
+                {passwordShown ? (
+                  <AiFillEyeInvisible
+                    onClick={togglePasswordVisiblity}
+                    size={25}
+                  />
+                ) : (
+                  <AiFillEye onClick={togglePasswordVisiblity} size={25} />
+                )}
+              </div>
             </div>
             <div className="flex justify-end">
               <button className="btn-secondary text-sm w-full ss:w-[200px] md:text-base p-2">
@@ -113,8 +129,10 @@ const Login = () => {
               </p>
             </div>
             <div className="flex justify-center">
-              <p className="text-sm  p-1 text-secondary cursor-pointer hover:text-secondaryDark transition-all duration-100"
-			     onClick={() => navigate(`/ForgotPass`)}>
+              <p
+                className="text-sm  p-1 text-secondary cursor-pointer hover:text-secondaryDark transition-all duration-100"
+                onClick={() => navigate(`/ForgotPass`)}
+              >
                 Şifrenizi mi unuttunuz?
               </p>
             </div>
