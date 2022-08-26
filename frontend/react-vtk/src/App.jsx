@@ -3,18 +3,20 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 
-import Home from "./pages/Home";
+//! ===== Components =====
 import Poly from "./components/Poly";
 import VolumeClip from "./components/VolumeClip";
 import GeometryViewer from "./components/GeometryViewer";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import ManyRenderers from "./components/ManyRenderers";
-
-import EmailVerifyPage from "./pages/EmailVerifyPage";
-import NotFound from "./pages/NotFound";
 import ResetPass from "./components/ResetPass";
 import ForgotPass from "./components/ForgotPass";
+
+//! ===== Pages =====
+import Home from "./pages/Home";
+import EmailVerifyPage from "./pages/EmailVerifyPage";
+import NotFound from "./pages/NotFound";
 import Settings from "./pages/Settings";
 
 function App() {
