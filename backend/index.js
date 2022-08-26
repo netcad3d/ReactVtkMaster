@@ -6,19 +6,16 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const helmet = require("helmet");
 
 const FileOperationsRoute = require("./routes/FileOperationsRoute");
 
 const AuthOperationsRoute = require("./routes/AuthOperationsRoute");
 const SinginRoute = require("./routes/SinginRoute");
 const passwordResetRoutes = require("./routes/PasswordReset");
-const deleteAccount = require("./routes/DeleteAccount");
 // const requireAuth = require("./middlewares/requireAuth");
 const checkUsers=require("./utils/cleanInactive");
 
 const app = express();
-app.use(helmet());
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -28,8 +25,6 @@ app.use(FileOperationsRoute);
 app.use("/api/signup", AuthOperationsRoute);
 app.use("/api/signin", SinginRoute);
 app.use("/api/password-reset", passwordResetRoutes);
-app.use("/api/delete-account", deleteAccount);
-
 
 //! DB Connection
 const mongoUri = process.env.MONGO_URI;

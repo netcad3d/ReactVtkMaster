@@ -12,11 +12,22 @@ const ResetPass = () => {
 
 	const url = `http://localhost:3000/api/password-reset/${param.id}/${param.token}`;
 
+	useEffect(() => {
+		const verifyUrl = async () => {
+			try {
+				await axios.get(url);
+				setValidUrl(true);
+			} catch (error) {
+				setValidUrl(false);
+			}
+		};
+		verifyUrl();
+	}, [param, url]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const { data } = await axios.delete(url, { password });
+			const { data } = await axios.post(url, { password });
 			setMsg(data.message);
 			setError("");
 			window.location = "/login";
