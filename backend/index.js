@@ -17,6 +17,7 @@ const checkUsers=require("./utils/cleanInactive");
 
 const app = express();
 
+
 app.use(cors());
 app.use(bodyParser.json());
 
