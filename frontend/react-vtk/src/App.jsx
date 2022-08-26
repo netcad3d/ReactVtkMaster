@@ -8,7 +8,6 @@ import Clip from "./components/Clip";
 import Poly from "./components/Poly";
 import SphereClip from "./components/SphereClip";
 import VolumeClip from "./components/VolumeClip";
-import VolumeViewer from "./components/VolumeViewer";
 import GeometryViewer from "./components/GeometryViewer";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
@@ -29,7 +28,6 @@ function App() {
         <Route path="/poly" element={<Poly />} />
         <Route path="/clip" element={<Clip />} />
         <Route path="/sphereClip" element={<SphereClip />} />
-        <Route path="/VolumeViewer" element={<VolumeViewer />} />
         <Route path="/VolumeClip" element={<VolumeClip />} />
         <Route path="/GeometryViewer" element={<GeometryViewer />} />
         <Route path="/ManyRenderers" element={<ManyRenderers />}></Route>
@@ -39,7 +37,7 @@ function App() {
         <Route path="/ForgotPass" element={<ForgotPass></ForgotPass>} />
         <Route path="/:id/verify/:token" element={<EmailVerifyPage />} />
         <Route path="*" element={<NotFound />} />
-		<Route path="/Settings" element={<Settings></Settings>} />
+        <Route path="/Settings" element={<Settings></Settings>} />
       </Routes>
     </>
   );
