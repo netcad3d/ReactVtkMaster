@@ -18,6 +18,7 @@ import EmailVerifyPage from "./pages/EmailVerifyPage";
 import NotFound from "./pages/NotFound";
 import ResetPass from "./components/ResetPass";
 import ForgotPass from "./components/ForgotPass";
+import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/ForgotPass" element={<ForgotPass></ForgotPass>} />
         <Route path="/:id/verify/:token" element={<EmailVerifyPage />} />
         <Route path="*" element={<NotFound />} />
+		<Route path="/Settings" element={<Settings></Settings>} />
       </Routes>
     </>
   );

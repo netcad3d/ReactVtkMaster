@@ -79,6 +79,7 @@ const Navbar = () => {
             </li>
 
             {auth._id ? (
+				<div  className="flex">
               <li
                 className="flex mr-5 md:mt-2 mt-10 text-white cursor-pointer"
                 onClick={() => {
@@ -102,6 +103,23 @@ const Navbar = () => {
                   Çıkış Yap
                 </div>
               </li>
+			  <li className="flex   text-white cursor-pointer">
+			  <NavLink
+                    className="text-sm flex items-center gap-x-4
+                      cursor-pointer "
+                    to="/Settings"
+                    style={{ color: "inherit", backgroundColor: "inherit" }}
+                  >
+				<div
+				 className={`flex md:ml-8 ml-0 md:block mt-1 
+				 duration-500 text-lg hover:text-[#d5d4d4]`}
+				>
+					Ayarlar
+				</div>
+				</NavLink>
+
+			  </li>
+			  </div>
             ) : (
               <>
                 <li className="flex mr-5 md:mt-2 mt-10 text-white">
