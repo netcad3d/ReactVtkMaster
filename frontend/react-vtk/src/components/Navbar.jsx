@@ -79,47 +79,46 @@ const Navbar = () => {
             </li>
 
             {auth._id ? (
-				<div  className="flex">
-              <li
-                className="flex mr-5 md:mt-2 mt-10 text-white cursor-pointer"
-                onClick={() => {
-                  dispatch(logoutUser(null));
-                  toast.info("Çıkış Yapıldı!", {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                  });
-                }}
-              >
-                <div
-                  className={`flex md:ml-8 ml-0 md:block 
-                  duration-500 text-lg hover:text-[#d5d4d4]`}
+              <div className="flex flex-col md:flex-row ">
+                <li
+                  className="flex mr-5 md:mt-2 mt-10 text-white cursor-pointer"
+                  onClick={() => {
+                    dispatch(logoutUser(null));
+                    toast.info("Çıkış Yapıldı!", {
+                      position: "top-right",
+                      autoClose: 3000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "dark",
+                    });
+                  }}
                 >
-                  Çıkış Yap
-                </div>
-              </li>
-			  <li className="flex   text-white cursor-pointer">
-			  <NavLink
+                  <div
+                    className={`flex md:ml-8 ml-0 md:block 
+                  duration-500 text-lg hover:text-[#d5d4d4]`}
+                  >
+                    Çıkış Yap
+                  </div>
+                </li>
+                <li className="flex mr-5 md:mt-2 mt-10 text-white cursor-pointer">
+                  <NavLink
                     className="text-sm flex items-center gap-x-4
-                      cursor-pointer "
+                    cursor-pointer "
                     to="/Settings"
                     style={{ color: "inherit", backgroundColor: "inherit" }}
                   >
-				<div
-				 className={`flex md:ml-8 ml-0 md:block mt-1 
-				 duration-500 text-lg hover:text-[#d5d4d4]`}
-				>
-					Ayarlar
-				</div>
-				</NavLink>
-
-			  </li>
-			  </div>
+                    <div
+                      className={`flex md:ml-8 ml-0 md:block 
+                  duration-500 text-lg hover:text-[#d5d4d4]`}
+                    >
+                      Profil
+                    </div>
+                  </NavLink>
+                </li>
+              </div>
             ) : (
               <>
                 <li className="flex mr-5 md:mt-2 mt-10 text-white">
