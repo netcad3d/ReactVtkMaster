@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
 import Swal from "sweetalert2";
@@ -8,7 +8,6 @@ import HeroImage from "/NETPROMine.jpg";
 
 const LandingPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   useEffect(() => {
     if (auth.registerStatus === "success" && !auth.verified) {

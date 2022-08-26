@@ -12,7 +12,6 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const auth = useSelector((state) => state.auth);
-  console.log(auth);
 
   return (
     <>

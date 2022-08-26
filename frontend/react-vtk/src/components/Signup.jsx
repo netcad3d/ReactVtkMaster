@@ -11,8 +11,6 @@ import Swal from "sweetalert2";
 const Signup = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const [msg, setMsg] = useState("");
-  const [error, setError] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
 
   const togglePasswordVisiblity = () => {

@@ -16,8 +16,6 @@ const Poly = () => {
   const context = useRef();
   const { fileId } = state;
 
-  console.log(fileId);
-
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
