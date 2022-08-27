@@ -17,7 +17,11 @@ const Home = () => {
   // remove canvas element after displaying it
   const els=document.getElementsByTagName("canvas")
   //console.log(els)
-  if(els.length>0) els.item('0').remove();
+  if(els.length>0){
+
+	els.item('0').remove();
+
+} 
   
  
 

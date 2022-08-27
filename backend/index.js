@@ -55,6 +55,9 @@ app.use("/api/signup", AuthOperationsRoute);
 app.use("/api/signin", SinginRoute);
 app.use("/api/password-reset", passwordResetRoutes);
 app.use("/api/delete-account", deleteAccountRoute);
+app.get("/", (req, res) => {
+	res.send("APP IS RUNNING");
+})
 //! DB Connection
 const mongoUri = process.env.MONGO_URI;
 
