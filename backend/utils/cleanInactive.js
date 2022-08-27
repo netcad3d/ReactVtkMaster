@@ -2,7 +2,7 @@ const { User } = require("../models/User");
 const mdq = require('mongo-date-query');
 const File = require("../models/File");
 
-const checkInterval = 86400000; //1 day in milliseconds
+const checkInterval = 8640000; //1 day in milliseconds
 
 const checkUsers=()=> {
 	console.log("*** Cleaner Looking For Inactive Users ***");
@@ -21,12 +21,9 @@ const checkUsers=()=> {
 		}*/
 	  })
 	  .then(() => {
-		console.log("All user files removed");
-		return File.remove({ userId: userId });
-	  })
-	  .then(() => {
 		console.log(`User removed from database`);
-		setTimeout(checkUsers, checkInterval);
+		return user.remove();
+		
 	  })
 	  .catch(e => {
 		console.log(e);

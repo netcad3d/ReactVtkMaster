@@ -11,6 +11,9 @@ const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const rateLimit = require('express-rate-limit');
 
+//optimization packages
+const compression = require("compression");
+
 // routes
 const FileOperationsRoute = require("./routes/FileOperationsRoute");
 
@@ -33,6 +36,14 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
+app.use(compression({
+level:8,
+threshold: 0
+
+}));
+
+
+app.use(express.static('public'));
 
 
 app.use(cors());
