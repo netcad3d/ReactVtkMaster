@@ -28,14 +28,14 @@ function App() {
         <Route path="/poly" element={<Poly />} />
         <Route path="/VolumeClip" element={<VolumeClip />} />
         <Route path="/GeometryViewer" element={<GeometryViewer />} />
-        <Route path="/ManyRenderers" element={<ManyRenderers />}></Route>
+        <Route path="/ManyRenderers" element={<ManyRenderers />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/ResetPass/:id/:token" element={<ResetPass></ResetPass>} />
-        <Route path="/ForgotPass" element={<ForgotPass></ForgotPass>} />
+        <Route path="/ResetPass/:id/:token" element={<ResetPass />} />
+        <Route path="/ForgotPass" element={<ForgotPass />} />
         <Route path="/:id/verify/:token" element={<EmailVerifyPage />} />
+        <Route path="/Settings" element={<Settings />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="/Settings" element={<Settings></Settings>} />
       </Routes>
     </>
   );
