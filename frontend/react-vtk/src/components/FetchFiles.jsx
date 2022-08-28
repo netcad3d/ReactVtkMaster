@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import { fetchFromAPI } from "../utils/fetchFromAPI";
 import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -19,27 +19,29 @@ const FetchFiles = () => {
   const config = { headers: { Authorization: `Bearer ${token}` } };
 
   useEffect(() => {
-    axios
+	fetchFromAPI('fetchFiles',token)
+	.then(data=> {
+		setFiles(data);
+	})
+	
+ /*   axios
       .get("http://localhost:3000/fetchFiles", config)
       .then((res) => {
         setFiles(res.data);
       })
       .catch((err) => {
         console.log(err);
-      });
+      });*/
   }, []);
 
   const fetchButton = (e) => {
     e.preventDefault();
 
-    axios
-      .get("http://localhost:3000/fetchFiles", config)
-      .then((res) => {
-        setFiles(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+	fetchFromAPI('fetchFiles',token)
+	.then(data=> {
+		setFiles(data);
+	})
+	
   };
 
   const deleteFile = (e, fileId) => {
@@ -59,7 +61,7 @@ const FetchFiles = () => {
         Swal.fire("Başarıyla silindi!", "Silindi", "success");
 
         axios
-          .delete(`http://localhost:3000/deleteFile/${fileId}`, config)
+          .delete(`https://netcad-vtk.herokuapp.com/deleteFile/${fileId}`, config)
           .then((res) => {
             res.status === 200
               ? toast.success("Başarıyla silindi.", {

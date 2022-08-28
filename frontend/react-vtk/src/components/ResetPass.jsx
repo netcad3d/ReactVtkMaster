@@ -2,6 +2,7 @@ import { useEffect, useState, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import styles from "../Styling/forgotPass.module.css";
+import {url} from '../slices/api';
 
 const ResetPass = () => {
 	const [validUrl, setValidUrl] = useState(false);
@@ -10,12 +11,12 @@ const ResetPass = () => {
 	const [error, setError] = useState("");
 	const param = useParams();
 
-	const url = `http://localhost:3000/api/password-reset/${param.id}/${param.token}`;
+	const URL = `${url}/password-reset/${param.id}/${param.token}`;
 
 	useEffect(() => {
 		const verifyUrl = async () => {
 			try {
-				await axios.get(url);
+				await axios.get(URL);
 				setValidUrl(true);
 			} catch (error) {
 				setValidUrl(false);
@@ -60,7 +61,7 @@ const ResetPass = () => {
 						/>
 						{error && <div className={styles.error_msg}>{error}</div>}
 						{msg && <div className={styles.success_msg}>{msg}</div>}
-						<button type="submit" className={styles.green_btn}>
+						<button type="submit" className="btn-secondary w-full ">
 							Submit
 						</button>
 					</form>

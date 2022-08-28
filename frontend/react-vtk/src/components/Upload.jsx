@@ -39,7 +39,7 @@ const Upload = ({ onSuccess }) => {
       });
     } else {
       axios
-        .post("http://localhost:3000/uploads", data, config)
+        .post("https://netcad-vtk.herokuapp.com/uploads", data, config)
         .then((res) => {
           res.status === 200
             ? toast.success("Başarıyla Yüklendi.", {

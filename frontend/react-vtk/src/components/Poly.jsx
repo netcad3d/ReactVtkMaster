@@ -25,7 +25,7 @@ const Poly = () => {
     }
   }, []);
 
-  const url = `http://localhost:3000/getFile/${fileId}`;
+  const url = `https://netcad-vtk.herokuapp.com/getFile/${fileId}`;
 
   useEffect(() => {
     if (!context.current) {
