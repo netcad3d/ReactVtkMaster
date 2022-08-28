@@ -5,26 +5,30 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../slices/authSlice";
 
 import { GoVerified, GoUnverified } from "react-icons/go";
 
 const Settings = () => {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [msg, setMsg] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
 	e.preventDefault();
-	const url = `http://localhost:3000/api/delete-account/${auth._id}`;
+	const url = `https://netcad-vtk.herokuapp.com/api/delete-account/${auth._id}`;
 	console.log(url);
 
 	try {
 		const { data } = await axios.delete(url);
 		setMsg(data.message);
+		//if(data.message === "User deleted successfully") 
 		setError("");
 		//window.location = "/login";
+		dispatch(logoutUser(null));
+				navigate("/login");
 	} catch (error) {
 		if (
 			error.response &&
@@ -102,7 +106,6 @@ const Settings = () => {
 			<button
 			type="submit"
             className="btn-secondary w-full md:w-[300px] mt-6"
-            onClick={() => navigate("/login")}
           >
             Hesabı sil
           </button>
