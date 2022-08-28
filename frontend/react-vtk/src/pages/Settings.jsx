@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../slices/authSlice";
 
+import Swal from "sweetalert2";
+
 import { GoVerified, GoUnverified } from "react-icons/go";
 
 const Settings = () => {
@@ -22,13 +24,26 @@ const Settings = () => {
 	console.log(url);
 
 	try {
+		Swal.fire({
+			title: "Emin misin?",
+			text: "Bu işlem geri döndürülemez!Dosyalarınız ve hesabınız silinecektir.",
+			icon: "warning",
+			showCancelButton: true,
+			cancelButtonText: "Vazgeç!",
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Evet, sil!",
+		  }).then(async(result) => {
+			if (result.isConfirmed) {
+			  Swal.fire("Hesabınız Başarıyla silindi :(", "Silindi", "success");
+			
 		const { data } = await axios.delete(url);
 		setMsg(data.message);
 		//if(data.message === "User deleted successfully") 
 		setError("");
 		//window.location = "/login";
 		dispatch(logoutUser(null));
-				navigate("/login");
+				navigate("/login");}});
 	} catch (error) {
 		if (
 			error.response &&
