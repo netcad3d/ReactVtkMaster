@@ -11,7 +11,9 @@ router.delete('/:id', async (req, res) => {
 	console.log("delete sta");
 
 	const id = new mongoose.Types.ObjectId(req.params.id);
-User.remove({ _id: id });
+	const user = await User.findOne({ _id: id });
+	user.remove();
+
 
 
 	
