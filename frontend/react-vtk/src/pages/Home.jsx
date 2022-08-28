@@ -22,7 +22,15 @@ const Home = () => {
 	els.item('0').remove();
 
 } 
-  
+
+
+const renderers =document.getElementsByClassName("renderer");
+
+const boxes = document.querySelectorAll('.renderer');
+
+boxes.forEach(box => {
+  box.remove();
+});
  
 
   return (

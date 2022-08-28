@@ -268,23 +268,14 @@ const ManyRenderers = () => {
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.name = "singleRendererCapture";
-      const label = document.createElement("label");
-      label.for = checkbox.name;
-      label.innerText = "Enable single renderer capture";
-
-      checkbox.addEventListener("input", (ev) => {
-        setCaptureCurrentRenderer(ev.target.checked);
-      });
-
-      document.body.appendChild(checkbox);
-      document.body.appendChild(label);
+   
       document.body.appendChild(document.createElement("br"));
 
       files.forEach((file) => {
         console.log(file);
         const fileId = file.fileId;
 
-        const url = `http://localhost:3000/getFile/${fileId}`;
+        const url = `https://netcad-vtk.herokuapp.com/getFile/${fileId}`;
 
         addRenderer(url);
       });

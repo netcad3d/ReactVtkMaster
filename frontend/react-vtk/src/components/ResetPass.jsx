@@ -2,7 +2,7 @@ import { useEffect, useState, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import styles from "../Styling/forgotPass.module.css";
-import {url} from '../slices/api';
+
 
 const ResetPass = () => {
 	const [validUrl, setValidUrl] = useState(false);
@@ -11,7 +11,7 @@ const ResetPass = () => {
 	const [error, setError] = useState("");
 	const param = useParams();
 
-	const URL = `${url}/password-reset/${param.id}/${param.token}`;
+	const URL = `https://netcad-vtk.herokuapp.com/api/password-reset/${param.id}/${param.token}`;
 
 	useEffect(() => {
 		const verifyUrl = async () => {
@@ -23,12 +23,12 @@ const ResetPass = () => {
 			}
 		};
 		verifyUrl();
-	}, [param, url]);
+	}, [param, URL]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const { data } = await axios.post(url, { password });
+			const { data } = await axios.post(URL, { password });
 			setMsg(data.message);
 			setError("");
 			window.location = "/login";

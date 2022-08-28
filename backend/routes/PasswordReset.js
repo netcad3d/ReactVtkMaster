@@ -86,6 +86,8 @@ router.post("/:id/:token", async (req, res) => {
       token: req.params.token,
     });
     if (!token) return res.status(400).send({ message: "Invalid link" });
+	console.log("here");
+	console.log(token);
 
     if (!user.verified) user.verified = true;
 
