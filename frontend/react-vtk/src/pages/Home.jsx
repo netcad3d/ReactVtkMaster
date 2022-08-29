@@ -12,7 +12,7 @@ const Home = () => {
     setFiles(savedFiles);
   };
   const authProps = useSelector((state) => state.auth);
-  console.log(authProps);
+  //console.log(authProps);
 
   // remove canvas element after displaying it
   const els=document.getElementsByTagName("canvas")
