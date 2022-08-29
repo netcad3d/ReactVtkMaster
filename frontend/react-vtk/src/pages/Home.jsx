@@ -65,7 +65,7 @@ boxes.forEach(box => {
           </div>
           <div className=" border-t-2 border-secondary w-[90%]">
             <h1 className="text-2xl text-white font-semibold tracking-wide text-center mt-3 mb-5">
-              Serverdaki Dosyalar
+              Sunucudaki Dosyalar
             </h1>
             <FetchFiles />
           </div>
