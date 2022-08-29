@@ -21,7 +21,7 @@ const Settings = () => {
   const handleSubmit = async (e) => {
 	e.preventDefault();
 	const url = `https://netcad-vtk.herokuapp.com/api/delete-account/${auth._id}`;
-	console.log(url);
+	//console.log(url);
 
 	try {
 		Swal.fire({

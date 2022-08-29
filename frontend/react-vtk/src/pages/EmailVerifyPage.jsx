@@ -17,7 +17,7 @@ const EmailVerifyPage = () => {
       try {
         const url = `https://netcad-vtk.herokuapp.com/${param.id}/verify/${param.token}`;
         const data = verifyToAPI(url);
-        console.log(data);
+        //console.log(data);
         localStorage.setItem("verify", data.verified);
         setValidUrl(true);
       } catch (error) {

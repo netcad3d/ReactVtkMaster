@@ -26,7 +26,7 @@ const Login = () => {
     password: "",
   });
 
-  console.log(auth);
+ // console.log(auth);
 
   useEffect(() => {
     if (auth._id) {

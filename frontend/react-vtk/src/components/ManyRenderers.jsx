@@ -272,7 +272,7 @@ const ManyRenderers = () => {
       document.body.appendChild(document.createElement("br"));
 
       files.forEach((file) => {
-        console.log(file);
+       // console.log(file);
         const fileId = file.fileId;
 
         const url = `https://netcad-vtk.herokuapp.com/getFile/${fileId}`;
